@@ -1,0 +1,28 @@
+:experimental:
+:source-highlighter: pygments
+:data-uri:
+:icons: font
+
+:toc:
+:numbered:
+
+= Technologies choices
+
+== Engine : TypeScript
+
+* How does it work ?
+
+== Server : NodeJS 
+
+* The Express framework is this good ?
+
+== Database : ?
+
+== Frontend ?
+
+== Continuous delivery ? Docker ?
+
+
+= Software architecture
+
+* The back-end should be called from the front-end, regardless wherever the server would be.
