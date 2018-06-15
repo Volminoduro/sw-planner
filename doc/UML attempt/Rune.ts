@@ -1,14 +1,21 @@
+import { StatBonus } from "./StatBonus";
+import { RuneTypeStat } from "./Enum/RuneTypeStat";
+import { RuneSet } from "./Enum/RuneSet";
+
 export class Rune{
 
-    mainBonus : Bonus;
+    location: number;
 
-    authorizedMainBonus : List<TypeStat>;
+    set: RuneSet;
 
-    prefixBonus : Bonus;
+    mainBonus : StatBonus;
+    authorizedMainBonus : Array<RuneTypeStat>;
+
+    prefixBonus : StatBonus;
     prefixName : string;
 
-    // authorizedPrefixBonus : List<TypeStat>; ?
+    // authorizedPrefixBonus : Array<TypeStat>; ?
 
-    subBonus : List<Bonus>;
+    subBonus : Array<StatBonus>;
   
 }
