@@ -7,6 +7,6 @@ export class Skill{
 
     cooldown: number;
 
-    effect: ?;
+    effect: void;
 
 }

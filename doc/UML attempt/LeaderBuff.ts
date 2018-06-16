@@ -1,8 +1,10 @@
+import { Context } from "./Enum/Context";
+import { StatBonus } from "./StatBonus";
+
 export class LeaderBuff{
 
     context : Context;
-    bonus : Bonus;
-    // How to set up the icons ?
+    bonus : StatBonus;
     contextIcon : string;
     bonusIcon : string;
 }
