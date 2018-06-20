@@ -1,0 +1,42 @@
+:experimental:
+:source-highlighter: pygments
+:data-uri:
+:icons: font
+
+:toc:
+:numbered:
+
+= Technologies choices
+
+== Engine : TypeScript
+
+* How does it work ?
+
+== Server : NodeJS
+
+* The Express framework is this good ?
+
+== Database : ?
+
+== Continuous delivery ? Jenkins + Docker ? Sonar ?
+
+== Testing framework, Jest ?
+
+= Software architecture
+
+* The back-end should be called from the front-end, regardless wherever the server would be.
+
+
+= Post-it (Technologies)
+
+firebase
+
+websocket
+Webresourcelocal (to save builds)
+cqrs
+propagation variable
+rest service call
+
+Save "state" of application
+
+= Owner need ?

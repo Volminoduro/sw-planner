@@ -5,3 +5,5 @@
 
 :toc:
 :numbered:
+
+A monster have name, which is displayed only if it's awaken.

@@ -18,6 +18,8 @@ export class MonsterImpl{
   isAwaken: boolean;
 
   leaderBuff : LeaderBuff;
+  currentBuffs : Buff;
+
   skills: Array<Skill>;
 
   stats: Array<MonsterStat>;
@@ -43,7 +45,10 @@ export class MonsterImpl{
           wantedStatBaseValue = this.calculateCurrentBaseValueOfStat(currentMonsterStats.minValue, currentMonsterStats.maxValue);
         }
       });
-      // TODO If i can't find the awaken value, i get the not-awaken value and log an error - TODO
+      // TODO If i can't find the awaken value, i get the not-awaken value 
+      // TODO If i can't find the value of this grade, i get the value of the current grade -1 (first the same awaken or not value then the others if i don't have)
+      // error = "Minor error, NO VALUE FOUND FOR "+MonsterTypeStatWanted.name+""+AwakenOrNot+" for this grade "+grade+"
+      // Resolution : picked the value of grade and awaken;
       // if(wantedStatBaseValue);
     }
     else{
@@ -73,6 +78,7 @@ export class MonsterImpl{
     this.runes.forEach( (rune) => {
       bonus = StatBonusUtils.addStatBonusToAnotherStatBonus(bonus, rune.calculateTotalStatBonus(MonsterTypeStatWanted));
     });
+    
     // Leader buff too
     // If there is buff applied ?
     // 
