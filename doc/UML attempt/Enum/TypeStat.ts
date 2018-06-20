@@ -1,4 +1,4 @@
-export class Stat{
+export class TypeStat{
 
     name : string;
     isPercentage : boolean;

@@ -1,6 +1,7 @@
 import { Attribute } from "./Enum/Attribute";
 import { MonsterTypeStat } from "./Enum/MonsterTypeStat";
-import { MonsterStats } from "./Enum/MonsterStats";
+import { TypeStat } from "./Enum/TypeStat";
+import { MonsterStat } from "./Enum/MonsterStat";
 import { LeaderBuff } from "./LeaderBuff";
 import { Skill } from "./Skill";
 import { Rune } from "./Rune";
@@ -19,10 +20,10 @@ export class MonsterImpl{
   leaderBuff : LeaderBuff;
   skills: Array<Skill>;
 
-  stats: Array<MonsterStats>;
+  stats: Array<MonsterStat>;
   runes: Array<Rune>;
 
-  getCalculatedStats(MonsterTypeStatWanted : MonsterTypeStat) : number{    
+  getCalculatedStats(MonsterTypeStatWanted : TypeStat) : number{    
     let wantedStatBaseValue : number = this.getBaseValueOfStat(MonsterTypeStatWanted);
     let myCalculatedStat: number;
 
@@ -30,15 +31,36 @@ export class MonsterImpl{
     return myCalculatedStat;
   }
 
-  getBaseValueOfStat(MonsterTypeStatWanted : MonsterTypeStat) : number {
+  getBaseValueOfStat(MonsterTypeStatWanted : TypeStat) : number {
     let wantedStatBaseValue : number;
+    // Attempt to error managing
+    let error : string;
+    let wantedMonsterStat : Array<MonsterStat> = this.getMonsterStat(MonsterTypeStatWanted);
+
+    if (wantedMonsterStat.length>0){
+      wantedMonsterStat.forEach( (currentMonsterStats) => {        
+        if (currentMonsterStats.monsterTypeStat == MonsterTypeStatWanted && this.grade == currentMonsterStats.grade && this.isAwaken == currentMonsterStats.isAwaken){
+          wantedStatBaseValue = this.calculateCurrentBaseValueOfStat(currentMonsterStats.minValue, currentMonsterStats.maxValue);
+        }
+      });
+      // TODO If i can't find the awaken value, i get the not-awaken value and log an error - TODO
+      // if(wantedStatBaseValue);
+    }
+    else{
+      error = "MAJOR ERROR, NO VALUE FOUND FOR "+MonsterTypeStatWanted.name;
+    }
+    
+    return wantedStatBaseValue;
+  }
+
+  getMonsterStat(MonsterTypeStatWanted : TypeStat, isAwaken? : boolean, grade? : number) : Array<MonsterStat> {
+    let wantedMonsterStat : Array<MonsterStat>;
     this.stats.forEach( (currentMonsterStats) => {
-      // TODO If i can't find the awaken value, i get the not-awaken value and log an error
       if (currentMonsterStats.monsterTypeStat == MonsterTypeStatWanted && this.grade == currentMonsterStats.grade && this.isAwaken == currentMonsterStats.isAwaken){
-        wantedStatBaseValue = this.calculateCurrentBaseValueOfStat(currentMonsterStats.minValue, currentMonsterStats.maxValue);
+        wantedMonsterStat.push(currentMonsterStats);
       }
     });
-    return wantedStatBaseValue;
+    return wantedMonsterStat;
   }
 
   calculateCurrentBaseValueOfStat(minValue : number, maxValue : number) : number{
@@ -46,11 +68,14 @@ export class MonsterImpl{
     return minValue + (incrementStatPerLevel*this.level);
   }
 
-  calculateGlobalBonusOfStat(MonsterTypeStatWanted : MonsterTypeStat) : StatBonus{
+  calculateGlobalBonusOfStat(MonsterTypeStatWanted : TypeStat) : StatBonus{
     let bonus : StatBonus = new StatBonus;
     this.runes.forEach( (rune) => {
       bonus = StatBonusUtils.addStatBonusToAnotherStatBonus(bonus, rune.calculateTotalStatBonus(MonsterTypeStatWanted));
     });
+    // Leader buff too
+    // If there is buff applied ?
+    // 
     return bonus;
   }
 

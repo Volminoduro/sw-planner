@@ -1,13 +1,13 @@
-import { Stat } from "../Enum/Stat";
+import { TypeStat } from "../Enum/TypeStat";
 
 export class MonsterTypeStat{
-    ATK_FLAT = new Stat("ATK", false);
-    DEF_FLAT = new Stat("DEF", false);
-    HP_FLAT = new Stat("HP", false);
-    SPD_FLAT = new Stat("SPD", false);
+    ATK_FLAT = new TypeStat("ATK", false);
+    DEF_FLAT = new TypeStat("DEF", false);
+    HP_FLAT = new TypeStat("HP", false);
+    SPD_FLAT = new TypeStat("SPD", false);
 
-    CRI_Rate = new Stat("CRI_R", true);
-    CRI_Dmg = new Stat("CRI_D", true);
-    Resistance = new Stat("RES", true);
-    Accuracy = new Stat("ACC", true);
+    CRI_Rate = new TypeStat("CRI_R", true);
+    CRI_Dmg = new TypeStat("CRI_D", true);
+    Resistance = new TypeStat("RES", true);
+    Accuracy = new TypeStat("ACC", true);
 }

@@ -1,9 +1,9 @@
-import { Stat } from "./Enum/Stat";
+import { TypeStat } from "./Enum/TypeStat";
 import { MonsterTypeStat } from "./Enum/MonsterTypeStat";
 
 export class StatBonus{
 
-    monsterTypeStat : MonsterTypeStat;
+    monsterTypeStat : TypeStat;
     flatBonus : number;
 
     multiBonus : number;
@@ -12,7 +12,7 @@ export class StatBonus{
     //    return new this(null, 0, 0);
     //}
 
-    constructor(wantedMonsterTypeStat? : MonsterTypeStat, wantedFlatBonus? : number, wantedMultiBonus? : number){
+    constructor(wantedMonsterTypeStat? : TypeStat, wantedFlatBonus? : number, wantedMultiBonus? : number){
         this.monsterTypeStat = wantedMonsterTypeStat;
         this.flatBonus = wantedFlatBonus;
         this.multiBonus = wantedMultiBonus;

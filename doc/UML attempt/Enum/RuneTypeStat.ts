@@ -1,9 +1,9 @@
-import { Stat } from "../Enum/Stat";
+import { TypeStat } from "../Enum/TypeStat";
 import { MonsterTypeStat } from "./MonsterTypeStat";
 
-export class RuneTypeStat extends MonsterTypeStat{
-    ATK_MULTI = new Stat("ATK", true);
-    DEF_MULTI = new Stat("DEF", true);
-    HP_MULTI = new Stat("HP", true);
-    SPD_MULTI = new Stat("SPD", true);
+export class RuneTypeStat extends TypeStat{
+    ATK_MULTI = new TypeStat("ATK", true);
+    DEF_MULTI = new TypeStat("DEF", true);
+    HP_MULTI = new TypeStat("HP", true);
+    SPD_MULTI = new TypeStat("SPD", true);
 }
