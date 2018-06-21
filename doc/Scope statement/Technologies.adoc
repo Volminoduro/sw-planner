@@ -16,7 +16,9 @@
 
 * The Express framework is this good ?
 
-== Database : ?
+== Database : MongoDB ?
+
+== ODM Reverse : http://typeorm.io/#/ ?
 
 == Continuous delivery ? Jenkins + Docker ? Sonar ?
 
