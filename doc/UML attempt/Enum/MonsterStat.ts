@@ -2,10 +2,7 @@ import { TypeStat } from "./TypeStat";
 
 export class MonsterStat{
 
-    monsterTypeStat : TypeStat;
-    grade : number;
+    monsterTypeStat : Stat;
     maxValue : number;
     minValue : number;
-    isAwaken : boolean;
-
 }

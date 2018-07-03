@@ -1,10 +1,3 @@
-export class TypeStat{
-
-    name : string;
-    isPercentage : boolean;
-
-    constructor(name: string, isPercentage: boolean){
-        this.name = name;
-        this.isPercentage = isPercentage;
-    }
+export enum TypeStat{
+    ALL, GUILD_VERSUS_GUILD, ARENA, DUNGEON, WATER_ATTRIBUTE, FIRE_ATTRIBUTE, WIND_ATTRIBUTE, DARK_ATTRIBUTE, LIGHT_ATTRIBUTE
 }

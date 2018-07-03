@@ -8,22 +8,26 @@ import { Rune } from "./Rune";
 import { StatBonus } from "./StatBonus";
 import { StatBonusUtils } from "./Utils/StatBonusUtils";
 
-export class MonsterImpl{
+export class Monster{
+
   name: string;
   family: string;
   attribute: Attribute;
 
+  isAwaken: boolean; 
   grade : number;
-  level: number;
-  isAwaken: boolean;
-
+  level: number;   
+  
+  // Le nombre d'étoiles en tant qu'indice de tableau
+  // TODO Le couple nombre d'étoiles et boolean isAwaken en tant que clé ?
+  stats: Array<MonsterStat>;
+  // Le nombre d'étoiles en tant qu'indice de tableau
+  statsAwakened: Array<MonsterStat>;
+  
   leaderBuff : LeaderBuff;
-  currentBuffs : Buff;
+  runes: Array<Rune>;
 
   skills: Array<Skill>;
-
-  stats: Array<MonsterStat>;
-  runes: Array<Rune>;
 
   getCalculatedStats(MonsterTypeStatWanted : TypeStat) : number{    
     let wantedStatBaseValue : number = this.getBaseValueOfStat(MonsterTypeStatWanted);
