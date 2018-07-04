@@ -1,12 +1,12 @@
-import { Stat } from "../Enum/Stat";
+import { Stat } from "../Entity/Stat";
 
 export class StatBonusUtils {
-    static addStatBonusToAnotherStatBonus(addedStatBonus : Stat, addingStatBonus : Stat) : Stat { 
-        if(addedStatBonus.monsterTypeStat == addingStatBonus.monsterTypeStat){
-            addedStatBonus.flatBonus += addingStatBonus.flatBonus;
-            addedStatBonus.multiBonus += addingStatBonus.multiBonus;
+    static getStatBonusToAnotherStatBonusAddition(addedStat : Stat, addingStat : Stat) : Stat {
+        // TODO : Is constructor really a suitable solution for comparaison ?
+        if(addedStat.constructor == addingStat.constructor && addedStat.name == addingStat.name){
+            addedStat.value=+ addingStat.value;
         }
-        return addedStatBonus;
+        return addedStat;
      }
     
 }

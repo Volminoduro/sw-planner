@@ -1,4 +1,4 @@
-import { Situation } from "./Enum/Situation";
+import { Situation } from "../Enum/Situation";
 import { Stat } from "./Stat";
 
 export class LeaderSkill{

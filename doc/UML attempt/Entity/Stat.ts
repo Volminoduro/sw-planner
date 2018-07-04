@@ -1,4 +1,4 @@
-import { TypeStat } from "./TypeStat";
+import { TypeStat } from "../Enum/TypeStat";
 export class Stat{
 
     name : TypeStat;
