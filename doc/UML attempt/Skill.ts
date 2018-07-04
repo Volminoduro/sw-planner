@@ -9,4 +9,6 @@ export class Skill{
 
     effect: void;
 
+    // Harmful effect rate
+
 }

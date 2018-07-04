@@ -1,8 +1,8 @@
 import { Attribute } from "./Enum/Attribute";
-import { MonsterTypeStat } from "./Enum/MonsterTypeStat";
+import { Stat } from "./Enum/Stat";
 import { TypeStat } from "./Enum/TypeStat";
 import { MonsterStat } from "./Enum/MonsterStat";
-import { LeaderBuff } from "./LeaderBuff";
+import { LeaderSkill } from "./LeaderSkill";
 import { Skill } from "./Skill";
 import { Rune } from "./Rune";
 import { StatBonus } from "./StatBonus";
@@ -20,57 +20,45 @@ export class Monster{
   
   // Le nombre d'étoiles en tant qu'indice de tableau
   // TODO Le couple nombre d'étoiles et boolean isAwaken en tant que clé ?
-  stats: Array<MonsterStat>;
+  stats: MonsterStat[][];
   // Le nombre d'étoiles en tant qu'indice de tableau
-  statsAwakened: Array<MonsterStat>;
+  statsAwakened: MonsterStat[][];
   
-  leaderBuff : LeaderBuff;
+  leaderSkill : LeaderSkill;
   runes: Array<Rune>;
 
   skills: Array<Skill>;
 
-  getCalculatedStats(MonsterTypeStatWanted : TypeStat) : number{    
+  getCalculatedStats(MonsterTypeStatWanted : Stat) : number{    
     let wantedStatBaseValue : number = this.getBaseValueOfStat(MonsterTypeStatWanted);
     let myCalculatedStat: number;
 
     // Then I 
+    // Cap for some stats, (not above 100 %)
+
     return myCalculatedStat;
   }
 
-  getBaseValueOfStat(MonsterTypeStatWanted : TypeStat) : number {
+  getBaseValueOfStat(MonsterTypeStatWanted : Stat, isAwaken? : boolean, grade? : number) : number {
     let wantedStatBaseValue : number;
-    // Attempt to error managing
-    let error : string;
-    let wantedMonsterStat : Array<MonsterStat> = this.getMonsterStat(MonsterTypeStatWanted);
-
-    if (wantedMonsterStat.length>0){
-      wantedMonsterStat.forEach( (currentMonsterStats) => {        
-        if (currentMonsterStats.monsterTypeStat == MonsterTypeStatWanted && this.grade == currentMonsterStats.grade && this.isAwaken == currentMonsterStats.isAwaken){
-          wantedStatBaseValue = this.calculateCurrentBaseValueOfStat(currentMonsterStats.minValue, currentMonsterStats.maxValue);
-        }
-      });
-      // TODO If i can't find the awaken value, i get the not-awaken value 
-      // TODO If i can't find the value of this grade, i get the value of the current grade -1 (first the same awaken or not value then the others if i don't have)
-      // error = "Minor error, NO VALUE FOUND FOR "+MonsterTypeStatWanted.name+""+AwakenOrNot+" for this grade "+grade+"
-      // Resolution : picked the value of grade and awaken;
-      // if(wantedStatBaseValue);
+    let wantedMonsterStat : MonsterStat[];
+    let inspectedMonsterStat : MonsterStat[][] = this.stats;
+    if(isAwaken){
+      inspectedMonsterStat = this.statsAwakened;
     }
-    else{
-      error = "MAJOR ERROR, NO VALUE FOUND FOR "+MonsterTypeStatWanted.name;
+    inspectedMonsterStat[grade].forEach( (currentMonsterStat) => {
+      if (currentMonsterStat.monsterTypeStat.name == MonsterTypeStatWanted.name){
+        wantedMonsterStat.push(currentMonsterStat);
+      }
+    });
+    if(!(wantedMonsterStat.length>0)){
+      // Question : I have to get another stat from another grade if this one is empty ? And how ?
+      // Same questio for awaken and not-awaken value
     }
-    
+    wantedStatBaseValue = wantedMonsterStat[0].getCalculatedValue(this.level, this.getMaxLevelLimit);
     return wantedStatBaseValue;
   }
 
-  getMonsterStat(MonsterTypeStatWanted : TypeStat, isAwaken? : boolean, grade? : number) : Array<MonsterStat> {
-    let wantedMonsterStat : Array<MonsterStat>;
-    this.stats.forEach( (currentMonsterStats) => {
-      if (currentMonsterStats.monsterTypeStat == MonsterTypeStatWanted && this.grade == currentMonsterStats.grade && this.isAwaken == currentMonsterStats.isAwaken){
-        wantedMonsterStat.push(currentMonsterStats);
-      }
-    });
-    return wantedMonsterStat;
-  }
 
   calculateCurrentBaseValueOfStat(minValue : number, maxValue : number) : number{
     let incrementStatPerLevel : number = maxValue / minValue;
@@ -87,6 +75,12 @@ export class Monster{
     // If there is buff applied ?
     // 
     return bonus;
+  }
+
+  getMaxLevelLimit() : number{
+    // TODO Goes by constants
+    // return (CurrentMonster.grade*Const.GRADE_LEVEL_INCREMENTS)+Const.NO_GRADE_MAX_LEVEL;
+    return 10+(this.grade*5);
   }
 
 }

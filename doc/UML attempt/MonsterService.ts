@@ -1,4 +1,4 @@
-import { MonsterImpl } from "./Monster";
+import { Monster } from "./Monster";
 
 // TODO
 export class MonsterService{
