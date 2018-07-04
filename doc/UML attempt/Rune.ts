@@ -1,4 +1,3 @@
-import { StatBonus } from "./StatBonus";
 import { RuneTypeStat } from "./Enum/RuneTypeStat";
 import { RuneSet } from "./Enum/RuneSet";
 import { Stat } from "./Enum/Stat";
@@ -10,18 +9,18 @@ export class Rune{
 
     set: RuneSet;
 
-    mainBonus : StatBonus;
+    mainBonus : Stat;
     authorizedMainBonus : Array<RuneTypeStat>;
 
-    prefixBonus : StatBonus;
+    prefixBonus : Stat;
     prefixName : string;
 
     // authorizedPrefixBonus : Array<TypeStat>; ?
 
     subBonus : Array<Stat>;
 
-    calculateTotalStatBonus(monsterTypeStatWanted : TypeStat) : StatBonus{
-        let currentStatBonus : StatBonus;
+    calculateTotalStatBonus(monsterTypeStatWanted : TypeStat) : Stat{
+        let currentStatBonus : Stat;
         currentStatBonus = StatBonusUtils.addStatBonusToAnotherStatBonus(currentStatBonus, this.mainBonus);
         currentStatBonus = StatBonusUtils.addStatBonusToAnotherStatBonus(currentStatBonus, this.prefixBonus);
         this.subBonus.forEach( (currentSubBonus) =>{

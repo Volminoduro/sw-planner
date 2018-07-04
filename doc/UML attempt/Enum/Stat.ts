@@ -22,5 +22,4 @@ export class PercentStat extends Stat{
     getValue() : number{
         return this.value;
     }
-
 }

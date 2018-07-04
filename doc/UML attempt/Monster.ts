@@ -5,7 +5,6 @@ import { MonsterStat } from "./Enum/MonsterStat";
 import { LeaderSkill } from "./LeaderSkill";
 import { Skill } from "./Skill";
 import { Rune } from "./Rune";
-import { StatBonus } from "./StatBonus";
 import { StatBonusUtils } from "./Utils/StatBonusUtils";
 
 export class Monster{
@@ -29,52 +28,76 @@ export class Monster{
 
   skills: Array<Skill>;
 
-  getCalculatedStats(MonsterTypeStatWanted : Stat) : number{    
-    let wantedStatBaseValue : number = this.getBaseValueOfStat(MonsterTypeStatWanted);
-    let myCalculatedStat: number;
+  getCalculatedValueOfStat(MonsterTypeStatWanted : Stat) : number{    
+    let wantedMonsterStat : MonsterStat = this.getMonsterStatFromStat(MonsterTypeStatWanted, this.grade, this.isAwaken);
+    let wantedStatBaseValue : number = wantedMonsterStat.getCalculatedBaseValue(this.level, this.getMaxLevelLimit());
+    let myCalculatedStat: number = wantedStatBaseValue;
+    let statCapValue: number = wantedMonsterStat.cap;
+    // TODO call to function
+    let multiplicativeStatBonusValue : number = this.getCalculatedGlobalBonusOfStat(new PercentStat());
+    // TODO call to function
+    let additiveStatBonusValue : number = this.getCalculatedGlobalBonusOfStat(new FlatStat());
 
-    // Then I 
-    // Cap for some stats, (not above 100 %)
+    myCalculatedStat = myCalculatedStat+(myCalculatedStat*(multiplicativeStatBonusValue/100))+additiveStatBonusValue;
 
+    if (myCalculatedStat>statCapValue){
+      myCalculatedStat=statCapValue;
+    }
     return myCalculatedStat;
   }
 
-  getBaseValueOfStat(MonsterTypeStatWanted : Stat, isAwaken? : boolean, grade? : number) : number {
-    let wantedStatBaseValue : number;
-    let wantedMonsterStat : MonsterStat[];
+  getMonsterStatFromStat(MonsterTypeStatWanted : Stat, grade : number, isAwaken? : boolean) : MonsterStat{
+    let wantedMonsterStat : MonsterStat;
     let inspectedMonsterStat : MonsterStat[][] = this.stats;
+    // TODO, grade control out of bounds
+    /*
+    if(grade > MAX_GRADE && grade <MIN_GRADE){
+      error.
+    }
+    */
     if(isAwaken){
       inspectedMonsterStat = this.statsAwakened;
     }
     inspectedMonsterStat[grade].forEach( (currentMonsterStat) => {
       if (currentMonsterStat.monsterTypeStat.name == MonsterTypeStatWanted.name){
-        wantedMonsterStat.push(currentMonsterStat);
+        wantedMonsterStat=currentMonsterStat;
       }
     });
-    if(!(wantedMonsterStat.length>0)){
+    return wantedMonsterStat;
+  }
+
+  getBaseValueOfStat(MonsterTypeStatWanted : Stat, isAwaken? : boolean, grade? : number) : number {
+    let wantedStatBaseValue : number;
+    let wantedMonsterStat : MonsterStat;
+    if(!(wantedMonsterStat==undefined)){
+      // TODO
       // Question : I have to get another stat from another grade if this one is empty ? And how ?
-      // Same questio for awaken and not-awaken value
+      // Same question for awaken and not-awaken value
     }
-    wantedStatBaseValue = wantedMonsterStat[0].getCalculatedValue(this.level, this.getMaxLevelLimit);
+    wantedStatBaseValue = wantedMonsterStat.getCalculatedBaseValue(this.level, this.getMaxLevelLimit());
     return wantedStatBaseValue;
   }
 
+  getCalculatedGlobalBonusOfStat(MonsterTypeStatWanted : Stat) : number{
 
-  calculateCurrentBaseValueOfStat(minValue : number, maxValue : number) : number{
-    let incrementStatPerLevel : number = maxValue / minValue;
-    return minValue + (incrementStatPerLevel*this.level);
-  }
-
-  calculateGlobalBonusOfStat(MonsterTypeStatWanted : TypeStat) : StatBonus{
-    let bonus : StatBonus = new StatBonus;
+    // calculate runes bonus + set (to do in function)
+    let bonus : number = 0;
     this.runes.forEach( (rune) => {
       bonus = StatBonusUtils.addStatBonusToAnotherStatBonus(bonus, rune.calculateTotalStatBonus(MonsterTypeStatWanted));
     });
-    
-    // Leader buff too
-    // If there is buff applied ?
-    // 
+    // Leader buff too (TODO)
+
+    // prepare for building bonus calculating (to do in function)
     return bonus;
+  }
+
+  calculateRunesTotalBonusOfStat(MonsterTypeStatWanted : TypeStat) : number{
+    // TODO
+    return 0;
+  }
+
+  calculateLeaderSkillBonusOfStat(MonsterTypeStatWanted : TypeStat) : Stat{
+
   }
 
   getMaxLevelLimit() : number{

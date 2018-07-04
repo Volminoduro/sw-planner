@@ -1,10 +1,10 @@
-import { Context } from "./Enum/Context";
-import { StatBonus } from "./StatBonus";
+import { Situation } from "./Enum/Situation";
+import { Stat } from "./Stat";
 
 export class LeaderSkill{
 
-    context : Context;
-    bonus : StatBonus;
+    situation : Situation;
+    stat : Stat;
     contextIcon : string;
     bonusIcon : string;
 }
