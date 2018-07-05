@@ -74,8 +74,11 @@ export class Monster{
     let globalBonus : number = 0;
     globalBonus += this.getTotalRunesBonusOfStat(monsterStatWanted);
 
-    globalBonus += this.calculateLeaderSkillBonusOfStat(monsterStatWanted);
+    globalBonus += this.getLeaderSkillBonusOfStat(monsterStatWanted);
     // prepare for building bonus calculating (to do in function)
+
+    globalBonus += this.getOthersBonusOfStat(monsterStatWanted);
+
     return globalBonus;
   }
 
@@ -87,13 +90,17 @@ export class Monster{
     return runesBonus.value;
   }
 
-  calculateLeaderSkillBonusOfStat(monsterStatWanted : Stat) : number{
+  getLeaderSkillBonusOfStat(monsterStatWanted : Stat) : number{
     // TODO : context as a global static class ?
     if(Context.currentSituation==Situation.ALL || Context.currentSituation==this.leaderSkill.situation){
       return StatBonusUtils.getStatBonusToAnotherStatBonusAddition(monsterStatWanted, this.leaderSkill.stat).value;
     }
     return 0;
-    
+  }
+
+  getOthersBonusOfStat(monsterStatWanted : Stat) : number{
+    // TODO : Buildings
+    return 0;
   }
 
   getMaxLevelLimit() : number{

@@ -12,6 +12,8 @@ export class Rune{
 
     // TODO Authorized stat on main, prefix and sub, depending of previous stat in upper consideration
 
+    // TODO How to cap some value to stats ?
+
     prefixBonus : Stat;
     prefixName : RunePrefix;    
 
