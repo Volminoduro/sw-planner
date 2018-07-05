@@ -20,7 +20,7 @@ export class Rune{
     subBonus : Array<Stat>;
 
     calculateTotalStatBonus(monsterTypeStatWanted : Stat) : Stat{
-        let currentStatBonus : Stat;
+        var currentStatBonus : Stat;
         currentStatBonus = StatBonusUtils.getStatBonusToAnotherStatBonusAddition(currentStatBonus, this.mainBonus);
         currentStatBonus = StatBonusUtils.getStatBonusToAnotherStatBonusAddition(currentStatBonus, this.prefixBonus);
         this.subBonus.forEach( (currentSubBonus) =>{

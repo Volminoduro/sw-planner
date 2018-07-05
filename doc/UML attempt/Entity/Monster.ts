@@ -26,6 +26,11 @@ export class Monster{
   stats: MonsterStat[][];
   // TODO : Number of grade as key to the array
   statsAwakened: MonsterStat[][];
+
+  statsEssai: {[grade : number, isAwaken: boolean][statName: string] :Stat};
+
+  map: { [email: string]: Customer; } = { };
+map['foo@gmail.com'] = new Customer(); // OK
   
   leaderSkill : LeaderSkill;
   runes: Array<Rune>;
@@ -33,28 +38,31 @@ export class Monster{
   skills: Array<Skill>;
 
   getCalculatedValueOfStat(MonsterTypeStatWanted : Stat) : number{    
-    let wantedMonsterStat : MonsterStat = this.getMonsterStatFromStat(MonsterTypeStatWanted, this.grade, this.isAwaken);
-    let wantedStatBaseValue : number = wantedMonsterStat.getCalculatedBaseValue(this.level, this.getMaxLevelLimit());
+    var wantedMonsterStat : MonsterStat = this.getMonsterStatFromStat(MonsterTypeStatWanted, this.grade, this.isAwaken);
+    var wantedStatBaseValue : number = wantedMonsterStat.getCalculatedBaseValue(this.level, this.getMaxLevelLimit());
     // TODO
     // Question : I have to get another stat from another grade if this one is empty ? And how ?
     // Same question for awaken and not-awaken value
-    let myCalculatedStatValue: number = wantedStatBaseValue;
-    let statCapValue: number = wantedMonsterStat.cap;
+    var myCalculatedStatValue: number = wantedStatBaseValue;
+    var statCapValue: number = wantedMonsterStat.cap;
     
-    let multiplicativeStatBonusValue : number = this.getCalculatedGlobalBonusOfStat(new PercentStat(MonsterTypeStatWanted.name, 0));
-    let additiveStatBonusValue : number = this.getCalculatedGlobalBonusOfStat(new FlatStat(MonsterTypeStatWanted.name, 0));
+    var multiplicativeStatBonusValue : number = this.getCalculatedGlobalBonusOfStat(new PercentStat(MonsterTypeStatWanted.name, 0));
+    var additiveStatBonusValue : number = this.getCalculatedGlobalBonusOfStat(new FlatStat(MonsterTypeStatWanted.name, 0));
 
     myCalculatedStatValue = myCalculatedStatValue+(myCalculatedStatValue*(multiplicativeStatBonusValue/100))+additiveStatBonusValue;
 
     if (myCalculatedStatValue>statCapValue){
       myCalculatedStatValue=statCapValue;
     }
+
+    var statsEssai: {[grade : number, isAwaken: boolean][statName: string] :Stat};
+
     return myCalculatedStatValue;
   }
 
   getMonsterStatFromStat(monsterStatWanted : Stat, grade : number, isAwaken? : boolean) : MonsterStat{
-    let wantedMonsterStat : MonsterStat;
-    let inspectedMonsterStat : MonsterStat[][] = this.stats;
+    var wantedMonsterStat : MonsterStat;
+    var inspectedMonsterStat : MonsterStat[][] = this.stats;
    if(grade>Const.MAX_GRADE || grade <Const.MIN_GRADE){
      // TODO : Error managing
      return;
@@ -71,7 +79,7 @@ export class Monster{
   }
 
   getCalculatedGlobalBonusOfStat(monsterStatWanted : Stat) : number{
-    let globalBonus : number = 0;
+    var globalBonus : number = 0;
     globalBonus += this.getTotalRunesBonusOfStat(monsterStatWanted);
 
     globalBonus += this.getLeaderSkillBonusOfStat(monsterStatWanted);
@@ -83,7 +91,7 @@ export class Monster{
   }
 
   getTotalRunesBonusOfStat(monsterStatWanted : Stat) : number{
-    let runesBonus : Stat;
+    var runesBonus : Stat;
     this.runes.forEach( (rune) => {
       runesBonus = StatBonusUtils.getStatBonusToAnotherStatBonusAddition(runesBonus, rune.calculateTotalStatBonus(monsterStatWanted));
     });
