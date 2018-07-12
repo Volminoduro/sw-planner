@@ -20,7 +20,7 @@
 
 == ODM Reverse : http://typeorm.io/#/ ?
 
-== Continuous delivery ? Jenkins + Docker ? Sonar ?
+== Continuous delivery ? Jenkins + Docker ? Sonar ? Travis for Github
 
 == Testing framework, Jest ?
 
