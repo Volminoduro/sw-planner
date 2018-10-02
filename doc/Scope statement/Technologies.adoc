@@ -8,6 +8,10 @@
 
 = Technologies choices
 
+== IDE : Visual Studio Code
+
+=== What is supposed to be the whole configuration for a easy-to-use development
+
 == Engine : TypeScript
 
 * How does it work ?
@@ -16,29 +20,52 @@
 
 * The Express framework is this good ?
 
-== Database : MongoDB ?
+== Database : Firebase for managing webhook easily ? MongoDB ? 
 
-== ODM Reverse : http://typeorm.io/#/ ?
+=== How can it save the spells configuration as it's save in NoSQL
 
-== Continuous delivery ? Jenkins + Docker ? Sonar ? Travis for Github
+== ODM Reverse : http://typeorm.io/#/ ? Does this work with Firebase
+
+== Continuous delivery ? Jenkins + Docker ? Sonar ? Travis for Github, can work with Heroku (HeroKu or Openshift can be suited for this purpose)
+
+=== Continuous delivery should do this : get called from Github's hook, compile, test the code, (put out some metrics about performance, rules, sonar ?) then deploy if the rest is successfull.
+
+=== How the whole packaging should be done ? Webpack, Grunt, Gulp, etc. ?
 
 == Testing framework, Jest ?
 
 = Software architecture
 
-* The back-end should be called from the front-end, regardless wherever the server would be.
+== Front-end (Node.js, TypeScript, Angular)
 
+* Is handled by Node.js' back-end for the very first version, as it's the static repository.
+
+* One-page-app : the first access load the whole dom template, then the rest is done through REST's calls to the back-end.
+
+* It should be easy to export to another location.
+
+== Back-end (Node.js, TypeScript, Firebase's ORM ?)
+
+* Host by Node.js
+
+* Should just have path to get called (allows call only from the front-end ?).
+
+* Contains datas transformation, etc. This should have the ORM's transformation ?
+
+== API (Node.js, minimal TypeScript ?)
+
+* Should have a mechanic with API-keys to not allow everyone to call it.
+
+== Continuous delivery (
 
 = Post-it (Technologies)
 
 firebase
-
 websocket
 Webresourcelocal (to save builds)
 cqrs
 propagation variable
 rest service call
-
 Save "state" of application
 
 = Owner need ?
