@@ -69,3 +69,12 @@ rest service call
 Save "state" of application
 
 = Owner need ?
+
+
+= Spells into back-end
+
+* The back-end should implements all the algorithm logic with all methods calls etc., but it should be something blank like abstract-interface function.
+
+* The front-end have all the implementations of those abstract-interface functions.
+
+* BEWARE : UNIT TEST IS REQUIRED. It should test that the implementation of method call exists, as a dynamic researcher. This will prevent from function renaming, deletion and creation (How to detect the methods from this interface ?)
