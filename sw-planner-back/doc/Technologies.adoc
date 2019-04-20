@@ -1,0 +1,46 @@
+:experimental:
+:source-highlighter: pygments
+:data-uri:
+:icons: font
+
+:toc:
+:numbered:
+
+= Technologies choices
+
+== IDE : IntelliJ
+
+=== What is supposed to be the whole configuration for a easy-to-use development
+
+== Engine : Java 8 (or +)
+
+== Server : Still to be determined (what's the best ?) [TODO]
+
+== Database : Firebase for managing webhook easily ? MongoDB ? [TODO]
+
+* Need : the java back-end should save in cache the informations asked from the client and reload it just in case of webhook trigerred by the database. [TODO]
+
+=== How can it save the spells configuration as it's save in NoSQL ? [TODO]
+
+== Continuous delivery ? Jenkins + Docker ? Sonar ? Travis for Github, can work with Heroku (HeroKu or Openshift can be suited for this purpose) [TODO]
+
+* Save on IntelliJ should : format code, remove unused import, launch all automatic tests. [TODO]
+* Commit pushed to remote should : trigger (Jenkins ?) job to build, test, package, pass analysis to Sonar and deploy to local server. [TODO]
+
+=== Continuous delivery should do this : get called from Github's hook, compile, test the code, (put out some metrics about performance, rules, sonar ?) then deploy if the rest is successfull. [TODO]
+
+=== Packaging + building : maven
+
+== Testing framework : JUnit
+
+= Software architecture
+
+== API (Technologies  ???)
+
+* At the moment : it's doesn't need to have a API key since the two servers should be on the same ip, probably. When it will needs two differents places for hosting, it will be a good thing to do.
+
+= Spells into back-end
+
+* The back-end should implements all the algorithm logic with all methods calls etc., but it should be something blank like abstract-interface function.
+
+* The front-end will always just have the results of actions sent by the back-end, it's doesn't the implementation do to it on it's own.
