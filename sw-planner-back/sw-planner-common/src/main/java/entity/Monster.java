@@ -1,10 +1,10 @@
 package entity;
 
-import enums.Attribute;
-import enums.Family;
-import enums.Role;
+import enums.*;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.SortedMap;
 
 public abstract class Monster implements Comparable<Monster> {
 
@@ -12,13 +12,13 @@ public abstract class Monster implements Comparable<Monster> {
     private Family family;
     private Attribute attribute;
     private Role role;
-    private int level;
+    private Level level;
     private boolean awakened;
-    private Collection<Stat> stats;
+    private SortedMap<StaticStatType, HashMap<Boolean, Integer>> staticStats;
+    private SortedMap<StarGrade, HashMap<Boolean, HashMap<EvolvingStatType, HashMap<Level, Integer>>>> evolvingStats;
+    // TODO : Everything, excepts skills' logic should be saved into database
     private Collection<Skill> skills;
     private LeaderSkill leaderSkill;
-
-    // TODO : Everything, excepts skills' logic should be saved into database
 
     public String getName() {
         return name;
@@ -52,11 +52,11 @@ public abstract class Monster implements Comparable<Monster> {
         this.role = role;
     }
 
-    public int getLevel() {
+    public Level getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(Level level) {
         this.level = level;
     }
 
@@ -68,12 +68,20 @@ public abstract class Monster implements Comparable<Monster> {
         this.awakened = awakened;
     }
 
-    public Collection<Stat> getStats() {
-        return stats;
+    public SortedMap<StaticStatType, HashMap<Boolean, Integer>> getStaticStats() {
+        return staticStats;
     }
 
-    public void setStats(Collection<Stat> stats) {
-        this.stats = stats;
+    public void setStaticStats(SortedMap<StaticStatType, HashMap<Boolean, Integer>> staticStats) {
+        this.staticStats = staticStats;
+    }
+
+    public SortedMap<StarGrade, HashMap<Boolean, HashMap<EvolvingStatType, HashMap<Level, Integer>>>> getEvolvingStats() {
+        return evolvingStats;
+    }
+
+    public void setEvolvingStats(SortedMap<StarGrade, HashMap<Boolean, HashMap<EvolvingStatType, HashMap<Level, Integer>>>> evolvingStats) {
+        this.evolvingStats = evolvingStats;
     }
 
     public Collection<Skill> getSkills() {
@@ -82,6 +90,14 @@ public abstract class Monster implements Comparable<Monster> {
 
     public void setSkills(Collection<Skill> skills) {
         this.skills = skills;
+    }
+
+    public LeaderSkill getLeaderSkill() {
+        return leaderSkill;
+    }
+
+    public void setLeaderSkill(LeaderSkill leaderSkill) {
+        this.leaderSkill = leaderSkill;
     }
 
     @Override
@@ -101,7 +117,7 @@ public abstract class Monster implements Comparable<Monster> {
                 ", role=" + role +
                 ", level=" + level +
                 ", awakened=" + awakened +
-                ", stats=" + stats +
+                ", evolvingStats=" + evolvingStats +
                 ", skills=" + skills +
                 '}';
     }

@@ -1,22 +1,21 @@
-package service;
+package application.service;
 
+import application.view.LeaderSkillView;
+import application.view.MonsterComboBoxView;
+import application.view.MonsterView;
 import entity.Monster;
 import enums.Attribute;
 import enums.Family;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-import view.MonsterView;
 
 import java.util.Collections;
 import java.util.List;
 
-@Service
 @CacheConfig(cacheNames={"monster"})
 public class MonsterWebServiceImpl implements MonsterWebService {
 
-    @Autowired
+//    @Autowired
     MonsterService monsterService;
 
     @Override
@@ -30,9 +29,14 @@ public class MonsterWebServiceImpl implements MonsterWebService {
 
     @Override
     @Cacheable
-    public List<Monster> getAllMonstersName(){
+    public List<MonsterComboBoxView> getAllMonstersName(){
         // TODO
         return Collections.EMPTY_LIST;
+    }
+
+    @Override
+    public List<LeaderSkillView> getAllLeadersSkill() {
+        return null;
     }
 
     @Override

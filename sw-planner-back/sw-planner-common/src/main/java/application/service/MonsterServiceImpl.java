@@ -1,15 +1,14 @@
-package service;
+package application.service;
 
-import com.sun.istack.internal.NotNull;
 import dao.MonsterDAO;
 import entity.Monster;
 import enums.Attribute;
 import enums.Family;
+import org.jetbrains.annotations.NotNull;
 
-@Service
+
 public class MonsterServiceImpl implements MonsterService {
 
-    @Autowired
     MonsterDAO monsterDAO;
 
     public Monster getMonsterFromName(@NotNull String name){

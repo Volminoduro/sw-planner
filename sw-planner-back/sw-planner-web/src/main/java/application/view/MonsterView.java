@@ -1,4 +1,4 @@
-package view;
+package application.view;
 
 import entity.LeaderSkill;
 import entity.Monster;
