@@ -15,7 +15,8 @@ public abstract class MonsterToMonsterViewMapper {
                 monster.isAwakened(),
                 MonsterStatToMonsterStatViewMapper.map(monster.getStaticStats()),
                 MonsterStatToMonsterStatViewMapper.map(monster.getEvolvingStats()),
-                monster.getSkills(),
+                MonsterRuneToMonsterRuneViewMap.map(monster.getRunes().getRunes()),
+                MonsterSkillToMonsterSkillViewMapper.map(monster.getSkills()),
                 monster.getLeaderSkill());
     }
 }

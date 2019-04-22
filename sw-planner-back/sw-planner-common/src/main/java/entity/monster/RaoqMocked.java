@@ -2,10 +2,11 @@ package entity.monster;
 
 import entity.*;
 import enums.*;
+import enums.rune.MonsterRuneSlot;
 import utils.LevelUtils;
 import utils.StatUtils;
 
-import java.util.Collection;
+import java.util.List;
 
 import static utils.StatUtils.*;
 
@@ -21,14 +22,37 @@ public class RaoqMocked extends Monster {
         this.setLevel(new Level(CommonConstantes.MINIMAL_LEVEL_MONSTER));
         this.setStaticStats(this.createStaticStats());
         this.setEvolvingStats(this.createEvolvingStats());
+        this.setRunes(this.createRunes());
         this.setSkills(this.createSkills());
         this.setLeaderSkill(null);
+    }
+
+    private MonsterRunes createRunes() {
+        // TODO
+        MonsterRunes monsterRunes = new MonsterRunes();
+
+        Rune rune = new Rune();
+        rune.setMainBonusStat(new BonusStat(new Stat(EvolvingStatType.ATK, 50), false));
+        rune.setName("Durable");
+        rune.setPrefixBonusStat(new BonusStat(new Stat(EvolvingStatType.DEF, 5), true));
+        rune.getSubBonusStats().add(new BonusStat(new Stat(EvolvingStatType.HP, 5), true));
+        rune.getSubBonusStats().add(new BonusStat(new Stat(EvolvingStatType.HP, 360), false));
+
+        monsterRunes.getRunes().put(MonsterRuneSlot.FIRST_SLOT, rune);
+
+        rune = new Rune();
+        rune.setMainBonusStat(new BonusStat(new Stat(EvolvingStatType.ATK, 15), true));
+        rune.getSubBonusStats().add(new BonusStat(new Stat(StaticStatType.SPD, 5), false));
+        rune.getSubBonusStats().add(new BonusStat(new Stat(EvolvingStatType.HP, 360), false));
+
+        monsterRunes.getRunes().put(MonsterRuneSlot.FOURTH_SLOT, rune);
+
+        return monsterRunes;
     }
 
     private MonsterStaticStats createStaticStats(){
         MonsterStaticStats stats = new MonsterStaticStats();
 
-        // TODO : Optimization to not duplicate entries with same value
         /**
          * Unawakened stats
          */
@@ -41,10 +65,10 @@ public class RaoqMocked extends Monster {
          * Awakened stats
          */
         stats.getStaticStats().put(Awaken.AWAKENED, StatUtils.generateEntryForStaticStat(StaticStatType.SPD, 108));
-        stats.getStaticStats().get(Awaken.AWAKENED).put(StaticStatType.CR, 15);
-        stats.getStaticStats().get(Awaken.AWAKENED).put(StaticStatType.CD, 50);
-        stats.getStaticStats().get(Awaken.AWAKENED).put(StaticStatType.RES, 15);
-        stats.getStaticStats().get(Awaken.AWAKENED).put(StaticStatType.ACC, 0);
+//        stats.getStaticStats().get(Awaken.AWAKENED).put(StaticStatType.CR, 15);
+//        stats.getStaticStats().get(Awaken.AWAKENED).put(StaticStatType.CD, 50);
+//        stats.getStaticStats().get(Awaken.AWAKENED).put(StaticStatType.RES, 15);
+//        stats.getStaticStats().get(Awaken.AWAKENED).put(StaticStatType.ACC, 0);
 
         return stats;
     }
@@ -117,7 +141,7 @@ public class RaoqMocked extends Monster {
         return stats;
     }
 
-    private Collection<Skill> createSkills(){
+    private List<Skill> createSkills(){
         return null;
     }
 

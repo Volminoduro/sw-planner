@@ -6,8 +6,12 @@ import enums.Role;
 import enums.StarGrade;
 
 import java.util.Collection;
+import java.util.List;
 
 public abstract class Monster implements Comparable<Monster> {
+
+    // TODO : Optimization to not duplicate entries with same value
+    // TODO : A get stat value method
 
     private String name;
     private Family family;
@@ -19,7 +23,10 @@ public abstract class Monster implements Comparable<Monster> {
     private MonsterStaticStats staticStats;
     private MonsterEvolvingStats evolvingStats;
     // TODO : Everything, excepts skills' logic should be saved into database
-    private Collection<Skill> skills;
+    private List<Skill> skills;
+    // TODO
+    private MonsterRunes runes;
+    // TODO
     private LeaderSkill leaderSkill;
 
     public String getName() {
@@ -94,11 +101,19 @@ public abstract class Monster implements Comparable<Monster> {
         this.evolvingStats = evolvingStats;
     }
 
-    public Collection<Skill> getSkills() {
+    public MonsterRunes getRunes() {
+        return runes;
+    }
+
+    public void setRunes(MonsterRunes runes) {
+        this.runes = runes;
+    }
+
+    public List<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(Collection<Skill> skills) {
+    public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
 
