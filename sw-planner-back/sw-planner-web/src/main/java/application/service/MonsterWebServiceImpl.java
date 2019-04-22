@@ -1,5 +1,6 @@
 package application.service;
 
+import application.mapper.MonsterToMonsterViewMapper;
 import application.view.LeaderSkillView;
 import application.view.MonsterComboBoxView;
 import application.view.MonsterView;
@@ -24,7 +25,7 @@ public class MonsterWebServiceImpl implements MonsterWebService {
         // TODO : If it's already loaded, we should check the id of modification of the monster on the database to check it's the same thing
         // TODO : If the id of modification is the same : we shouldn't even sent a monster back, just a OK message telling
         // TODO : https://medium.com/@igorkosandyak/spring-boot-caching-d74591abe117
-        return new MonsterView(monsterService.getMonsterFromName(name));
+        return MonsterToMonsterViewMapper.map(monsterService.getMonsterFromName(name));
     }
 
     @Override

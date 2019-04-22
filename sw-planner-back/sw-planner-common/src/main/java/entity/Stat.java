@@ -27,4 +27,12 @@ public class Stat {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "Stat{" +
+                "statType=" + statType +
+                ", amount=" + amount +
+                '}';
+    }
 }

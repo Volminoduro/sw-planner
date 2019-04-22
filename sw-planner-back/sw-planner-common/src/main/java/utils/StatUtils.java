@@ -1,16 +1,22 @@
 package utils;
 
 import entity.Level;
+import enums.Awaken;
 import enums.EvolvingStatType;
+import enums.StaticStatType;
 
 import java.util.HashMap;
 
 public abstract class StatUtils {
 
+    public static HashMap<StaticStatType, Integer> generateEntryForStaticStat(StaticStatType staticStatType, int amount){
+        HashMap<StaticStatType, Integer> stat = new HashMap<>();
+        stat.put(staticStatType, amount);
+        return stat;
+    }
 
-
-    public static HashMap<Boolean, HashMap<EvolvingStatType, HashMap<Level, Integer>>> generateEntryForEvolvingStat(boolean awakened, EvolvingStatType evolvingStatType, int level, int amount){
-        HashMap<Boolean, HashMap<EvolvingStatType, HashMap<Level, Integer>>> stat = new HashMap<>();
+    public static HashMap<Awaken, HashMap<EvolvingStatType, HashMap<Level, Integer>>> generateCompleteEntryForEvolvingStat(Awaken awakened, EvolvingStatType evolvingStatType, int level, int amount){
+        HashMap<Awaken, HashMap<EvolvingStatType, HashMap<Level, Integer>>> stat = new HashMap<>();
         HashMap<EvolvingStatType, HashMap<Level, Integer>> evolvingStatTypeMap = new HashMap<>();
         HashMap<Level, Integer> amountMap = new HashMap<>();
 
@@ -20,13 +26,22 @@ public abstract class StatUtils {
         return stat;
     }
 
-    public static HashMap<Boolean, HashMap<EvolvingStatType, HashMap<Level, Integer>>> generateEntryForEvolvingStat(boolean awakened, EvolvingStatType evolvingStatType, Level level, int amount){
-        return generateEntryForEvolvingStat(awakened, evolvingStatType, level.getLevel(), amount);
+    public static HashMap<Awaken, HashMap<EvolvingStatType, HashMap<Level, Integer>>> generateCompleteEntryForEvolvingStat(Awaken awakened, EvolvingStatType evolvingStatType, Level level, int amount){
+        return generateCompleteEntryForEvolvingStat(awakened, evolvingStatType, level.getLevel(), amount);
     }
 
-    public static HashMap<Boolean, Integer> generateEntryForStaticStat(boolean awakened, int amount){
-        HashMap<Boolean, Integer> stat = new HashMap<>();
-        stat.put(awakened, amount);
+    public static HashMap<EvolvingStatType, HashMap<Level, Integer>> generatePartialEntryForEvolvingStat(EvolvingStatType evolvingStatType, int level, int amount){
+        HashMap<EvolvingStatType, HashMap<Level, Integer>> stat = new HashMap<>();
+        HashMap<Level, Integer> amountMap = new HashMap<>();
+
+        amountMap.put(new Level(level), amount);
+        stat.put(evolvingStatType, amountMap);
+        return stat;
+    }
+
+    public static HashMap<Level, Integer> generateVeryPartialEntryForEvolvingStat(int level, int amount){
+        HashMap<Level, Integer> stat = new HashMap<>();
+        stat.put(new Level(level), amount);
         return stat;
     }
 }

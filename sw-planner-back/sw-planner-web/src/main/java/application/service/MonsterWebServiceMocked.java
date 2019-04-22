@@ -1,5 +1,6 @@
 package application.service;
 
+import application.mapper.MonsterToMonsterViewMapper;
 import application.view.LeaderSkillView;
 import application.view.MonsterComboBoxView;
 import application.view.MonsterView;
@@ -17,10 +18,7 @@ public class MonsterWebServiceMocked implements MonsterWebService {
 
     @Override
     public MonsterView getMonsterFromName(String name) {
-        // TODO : Create a Roaq
-        Monster raoq = monsterService.getMonsterFromName(name);
-        // TODO : Transformin Monster to MonsterView
-        return null;
+        return MonsterToMonsterViewMapper.map(monsterService.getMonsterFromName(name));
     }
 
     @Override
