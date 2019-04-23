@@ -1,0 +1,21 @@
+:experimental:
+:source-highlighter: pygments
+:data-uri:
+:icons: font
+
+:toc:
+:numbered:
+
+= TODO
+
+== Database
+
+=== MongoDB
+
+* https://www.mongodb.com/cloud/atlas/pricing
+
+* Whats is the main perks of MongoDB ?
+
+* Is it possible to have the database online ?
+
+* https://spring.io/guides/gs/accessing-data-mongodb/
