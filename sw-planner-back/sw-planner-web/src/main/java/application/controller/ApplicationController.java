@@ -24,17 +24,17 @@ public class ApplicationController {
         return "Hello World !";
     }
 
-    @GetMapping(value = "/Monster/get/{name}")
+    @GetMapping(value = "/monster/get/{name}")
     public MonsterView getMonster(@PathVariable @NotNull String name) {
         return monsterWebService.getMonsterFromName(name);
     }
 
-    @GetMapping(value = "/Monster/getAllNames")
+    @GetMapping(value = "/monster/getAllNames")
     public List<MonsterComboBoxView> getAllMonstersName() {
         return monsterWebService.getAllMonstersName();
     }
 
-    @GetMapping(value = "/Monster/getAllLeadersSkill")
+    @GetMapping(value = "/monster/getAllLeadersSkill")
     public List<LeaderSkillView> getAllsLeadersSkill() {
         return monsterWebService.getAllLeadersSkill();
     }

@@ -4,19 +4,20 @@ import application.mapper.MonsterToMonsterViewMapper;
 import application.view.LeaderSkillView;
 import application.view.MonsterComboBoxView;
 import application.view.MonsterView;
-import entity.Monster;
-import enums.Attribute;
-import enums.Family;
+import application.entity.Monster;
+import application.enums.Attribute;
+import application.enums.Family;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 
 import java.util.Collections;
 import java.util.List;
 
-@CacheConfig(cacheNames={"monster"})
+//@CacheConfig(cacheNames={"monster"})
 public class MonsterWebServiceImpl implements MonsterWebService {
 
-//    @Autowired
+    @Autowired
     MonsterService monsterService;
 
     @Override

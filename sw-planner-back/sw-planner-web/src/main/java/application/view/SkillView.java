@@ -1,6 +1,6 @@
 package application.view;
 
-import entity.Skill;
+import application.entity.Skill;
 
 public class SkillView {
 

@@ -1,6 +1,6 @@
 package application.view;
 
-import entity.LeaderSkill;
+import application.entity.LeaderSkill;
 
 import java.util.Collection;
 import java.util.HashMap;

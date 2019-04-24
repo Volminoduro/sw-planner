@@ -1,7 +1,7 @@
 package application.mapper;
 
-import entity.MonsterEvolvingStats;
-import entity.MonsterStaticStats;
+import application.entity.MonsterEvolvingStats;
+import application.entity.MonsterStaticStats;
 
 import java.util.HashMap;
 import java.util.Map;

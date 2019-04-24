@@ -1,8 +1,7 @@
 package application.view;
 
-import entity.BonusStat;
-import entity.Stat;
-import enums.StatType;
+import application.entity.BonusStat;
+import application.enums.StatType;
 import org.jetbrains.annotations.NotNull;
 
 public class BonusStatsView {

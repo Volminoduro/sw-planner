@@ -1,8 +1,8 @@
 package application.service;
 
-import entity.Monster;
-import enums.Attribute;
-import enums.Family;
+import application.entity.Monster;
+import application.enums.Attribute;
+import application.enums.Family;
 
 public interface MonsterService {
 

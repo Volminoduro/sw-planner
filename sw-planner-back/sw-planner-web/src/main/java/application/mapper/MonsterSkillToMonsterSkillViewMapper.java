@@ -1,7 +1,7 @@
 package application.mapper;
 
 import application.view.SkillView;
-import entity.Skill;
+import application.entity.Skill;
 
 import java.util.ArrayList;
 import java.util.Collections;

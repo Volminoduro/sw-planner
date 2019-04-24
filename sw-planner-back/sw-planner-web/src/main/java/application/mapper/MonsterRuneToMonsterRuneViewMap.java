@@ -1,8 +1,8 @@
 package application.mapper;
 
 import application.view.RuneView;
-import entity.Rune;
-import enums.rune.MonsterRuneSlot;
+import application.entity.Rune;
+import application.enums.rune.MonsterRuneSlot;
 
 import java.util.SortedMap;
 import java.util.TreeMap;

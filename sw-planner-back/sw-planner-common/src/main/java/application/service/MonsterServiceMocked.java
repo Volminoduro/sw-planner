@@ -1,10 +1,12 @@
 package application.service;
 
-import entity.Monster;
-import entity.monster.RaoqMocked;
-import enums.Attribute;
-import enums.Family;
+import application.entity.Monster;
+import application.entity.monster.RaoqMocked;
+import application.enums.Attribute;
+import application.enums.Family;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MonsterServiceMocked implements MonsterService {
 
     @Override

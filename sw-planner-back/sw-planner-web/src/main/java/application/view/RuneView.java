@@ -1,11 +1,9 @@
 package application.view;
 
-import entity.BonusStat;
-import entity.Rune;
-import enums.StarGrade;
+import application.entity.Rune;
+import application.enums.StarGrade;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RuneView {
 

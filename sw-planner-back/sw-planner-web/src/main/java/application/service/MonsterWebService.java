@@ -3,9 +3,9 @@ package application.service;
 import application.view.LeaderSkillView;
 import application.view.MonsterComboBoxView;
 import application.view.MonsterView;
-import entity.Monster;
-import enums.Attribute;
-import enums.Family;
+import application.entity.Monster;
+import application.enums.Attribute;
+import application.enums.Family;
 
 import java.util.List;
 
