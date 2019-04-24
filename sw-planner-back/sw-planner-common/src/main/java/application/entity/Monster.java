@@ -9,8 +9,7 @@ import java.util.List;
 
 public abstract class Monster implements Comparable<Monster> {
 
-    // TODO : Optimization to not duplicate entries with same value
-    // TODO : A get stat value method
+    // TODO : Optimization to not duplicate entries with same value during a get stat value method call
 
     private String name;
     private Family family;
@@ -24,9 +23,23 @@ public abstract class Monster implements Comparable<Monster> {
     // TODO : Everything, excepts skills' logic should be saved into database
     private List<Skill> skills;
     // TODO
-    private MonsterRunes runes;
-    // TODO
     private LeaderSkill leaderSkill;
+
+    public Monster() {
+    }
+
+    protected Monster(Monster monster) {
+        this.name = monster.name;
+        this.family = monster.family;
+        this.attribute = monster.attribute;
+        this.role = monster.role;
+        this.starGrade = monster.starGrade;
+        this.level = monster.level;
+        this.awakened = monster.awakened;
+        this.staticStats = monster.staticStats;
+        this.evolvingStats = monster.evolvingStats;
+        this.skills = monster.skills;
+    }
 
     public String getName() {
         return name;
@@ -98,14 +111,6 @@ public abstract class Monster implements Comparable<Monster> {
 
     public void setEvolvingStats(MonsterEvolvingStats evolvingStats) {
         this.evolvingStats = evolvingStats;
-    }
-
-    public MonsterRunes getRunes() {
-        return runes;
-    }
-
-    public void setRunes(MonsterRunes runes) {
-        this.runes = runes;
     }
 
     public List<Skill> getSkills() {

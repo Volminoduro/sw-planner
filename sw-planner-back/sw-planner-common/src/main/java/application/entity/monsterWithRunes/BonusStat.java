@@ -1,4 +1,4 @@
-package application.entity;
+package application.entity.monsterWithRunes;
 
 public class BonusStat {
 

@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.entity.MongoSample;
 import application.service.MonsterWebService;
 import application.view.LeaderSkillView;
 import application.view.MonsterComboBoxView;
@@ -22,6 +23,11 @@ public class ApplicationController {
     @RequestMapping(value = "/")
     public String anyPoint() {
         return "Hello World !";
+    }
+
+    @GetMapping(value = "/mongo")
+    public MongoSample essaiMongoDB() {
+        return monsterWebService.getMongoSample();
     }
 
     @GetMapping(value = "/monster/get/{name}")

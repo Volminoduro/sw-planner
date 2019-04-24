@@ -1,6 +1,10 @@
-package application.entity.monster;
+package application.entity.concreteMonster;
 
 import application.entity.*;
+import application.entity.monsterWithRunes.BonusStat;
+import application.entity.monsterWithRunes.MonsterRunes;
+import application.entity.monsterWithRunes.Rune;
+import application.entity.monsterWithRunes.Stat;
 import application.enums.*;
 import application.enums.rune.MonsterRuneSlot;
 import application.utils.LevelUtils;
@@ -22,7 +26,6 @@ public class RaoqMocked extends Monster {
         this.setLevel(new Level(CommonConstantes.MINIMAL_LEVEL_MONSTER));
         this.setStaticStats(this.createStaticStats());
         this.setEvolvingStats(this.createEvolvingStats());
-        this.setRunes(this.createRunes());
         this.setSkills(this.createSkills());
         this.setLeaderSkill(null);
     }

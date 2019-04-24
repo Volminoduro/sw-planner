@@ -1,6 +1,6 @@
 package application.enums.rune;
 
-import application.entity.Stat;
+import application.entity.monsterWithRunes.Stat;
 
 import java.util.List;
 

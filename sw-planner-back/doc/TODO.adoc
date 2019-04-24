@@ -16,6 +16,8 @@
 
 * Whats is the main perks of MongoDB ?
 
+* https://cloud.mongodb.com/v2/5cc05ef9ff7a25138c101cff#clusters/connect?clusterId=SMA
+
 * Is it possible to have the database online ?
 
 * https://spring.io/guides/gs/accessing-data-mongodb/

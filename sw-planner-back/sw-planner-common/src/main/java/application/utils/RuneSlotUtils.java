@@ -1,6 +1,6 @@
 package application.utils;
 
-import application.entity.Stat;
+import application.entity.monsterWithRunes.Stat;
 
 import java.util.ArrayList;
 import java.util.List;

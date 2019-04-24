@@ -1,7 +1,7 @@
 package application.service;
 
 import application.entity.Monster;
-import application.entity.monster.RaoqMocked;
+import application.entity.concreteMonster.RaoqMocked;
 import application.enums.Attribute;
 import application.enums.Family;
 import org.springframework.stereotype.Service;

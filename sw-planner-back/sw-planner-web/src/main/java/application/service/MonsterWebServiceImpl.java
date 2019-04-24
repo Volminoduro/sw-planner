@@ -1,5 +1,6 @@
 package application.service;
 
+import application.entity.MongoSample;
 import application.mapper.MonsterToMonsterViewMapper;
 import application.view.LeaderSkillView;
 import application.view.MonsterComboBoxView;
@@ -27,6 +28,11 @@ public class MonsterWebServiceImpl implements MonsterWebService {
         // TODO : If the id of modification is the same : we shouldn't even sent a monster back, just a OK message telling
         // TODO : https://medium.com/@igorkosandyak/spring-boot-caching-d74591abe117
         return MonsterToMonsterViewMapper.map(monsterService.getMonsterFromName(name));
+    }
+
+    @Override
+    public MongoSample getMongoSample() {
+        return null;
     }
 
     @Override

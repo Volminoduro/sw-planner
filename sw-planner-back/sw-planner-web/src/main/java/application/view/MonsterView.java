@@ -5,7 +5,6 @@ import application.entity.LeaderSkill;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.SortedMap;
 
 public class MonsterView {
 
@@ -18,12 +17,11 @@ public class MonsterView {
     private boolean awakened;
     private Map<Boolean, HashMap<String, Integer>> staticStats;
     private Map<Integer, HashMap<Boolean, HashMap<String, HashMap<Integer, Integer>>>> evolvingStats;
-    private SortedMap<Integer, RuneView> runes;
     // TODO : Remove skill logic
     private Collection<SkillView> skills;
     private LeaderSkill leaderSkill;
 
-    public MonsterView(String name, String family, String attribute, String role, int starGrade, int level, boolean awakened, Map<Boolean, HashMap<String, Integer>> staticStats, Map<Integer, HashMap<Boolean, HashMap<String, HashMap<Integer, Integer>>>> evolvingStats, SortedMap<Integer, RuneView> runes, Collection<SkillView> skills, LeaderSkill leaderSkill) {
+    public MonsterView(String name, String family, String attribute, String role, int starGrade, int level, boolean awakened, Map<Boolean, HashMap<String, Integer>> staticStats, Map<Integer, HashMap<Boolean, HashMap<String, HashMap<Integer, Integer>>>> evolvingStats, Collection<SkillView> skills, LeaderSkill leaderSkill) {
         this.name = name;
         this.family = family;
         this.attribute = attribute;
@@ -33,7 +31,6 @@ public class MonsterView {
         this.awakened = awakened;
         this.staticStats = staticStats;
         this.evolvingStats = evolvingStats;
-        this.runes = runes;
         this.skills = skills;
         this.leaderSkill = leaderSkill;
     }
@@ -108,14 +105,6 @@ public class MonsterView {
 
     public void setEvolvingStats(Map<Integer, HashMap<Boolean, HashMap<String, HashMap<Integer, Integer>>>> evolvingStats) {
         this.evolvingStats = evolvingStats;
-    }
-
-    public SortedMap<Integer, RuneView> getRunes() {
-        return runes;
-    }
-
-    public void setRunes(SortedMap<Integer, RuneView> runes) {
-        this.runes = runes;
     }
 
     public Collection<SkillView> getSkills() {

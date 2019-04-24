@@ -1,5 +1,6 @@
 package application.entity;
 
+import application.entity.monsterWithRunes.Stat;
 import application.enums.LeaderBuffContext;
 
 public class LeaderSkill {

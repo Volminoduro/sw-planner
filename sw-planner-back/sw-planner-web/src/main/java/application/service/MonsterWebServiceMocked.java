@@ -1,5 +1,8 @@
 package application.service;
 
+import application.dao.MongoSampleRepository;
+import application.entity.MongoDocument;
+import application.entity.MongoSample;
 import application.mapper.MonsterToMonsterViewMapper;
 import application.view.LeaderSkillView;
 import application.view.MonsterComboBoxView;
@@ -18,9 +21,23 @@ public class MonsterWebServiceMocked implements MonsterWebService {
     @Autowired
     MonsterService monsterService;
 
+    @Autowired
+    MongoSampleRepository mongoSampleRepository;
+
     @Override
     public MonsterView getMonsterFromName(String name) {
         return MonsterToMonsterViewMapper.map(monsterService.getMonsterFromName(name));
+    }
+
+    @Override
+    public MongoSample getMongoSample(){
+        MongoSample mongoSample = new MongoSample("MonNom", 42, new MongoDocument("MonNomDocument", "MonContenu"));
+        mongoSampleRepository.save(mongoSample);
+        mongoSample = new MongoSample("essai", 42, new MongoDocument("MonNomDocument2", "MonContenu"));
+        mongoSampleRepository.save(mongoSample);
+        mongoSample = new MongoSample("essai2", 42, new MongoDocument("MonNomDocument", "MonContenu"));
+        mongoSampleRepository.save(mongoSample);
+        return mongoSampleRepository.findByNom("essai");
     }
 
     @Override
