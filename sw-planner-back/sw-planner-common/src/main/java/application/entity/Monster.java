@@ -4,12 +4,12 @@ import application.enums.Attribute;
 import application.enums.Family;
 import application.enums.Role;
 import application.enums.StarGrade;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
+@Document(collection = "monster")
 public abstract class Monster implements Comparable<Monster> {
-
-    // TODO : Optimization to not duplicate entries with same value during a get stat value method call
 
     private String name;
     private Family family;

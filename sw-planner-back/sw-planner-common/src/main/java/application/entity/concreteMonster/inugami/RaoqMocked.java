@@ -1,19 +1,16 @@
-package application.entity.concreteMonster;
+package application.entity.concreteMonster.inugami;
 
 import application.entity.*;
-import application.entity.monsterWithRunes.BonusStat;
-import application.entity.monsterWithRunes.MonsterRunes;
-import application.entity.monsterWithRunes.Rune;
-import application.entity.monsterWithRunes.Stat;
 import application.enums.*;
-import application.enums.rune.MonsterRuneSlot;
 import application.utils.LevelUtils;
 import application.utils.StatUtils;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
 import static application.utils.StatUtils.*;
 
+@Document(collection = "monster")
 public class RaoqMocked extends Monster {
 
     public RaoqMocked(){
@@ -28,29 +25,6 @@ public class RaoqMocked extends Monster {
         this.setEvolvingStats(this.createEvolvingStats());
         this.setSkills(this.createSkills());
         this.setLeaderSkill(null);
-    }
-
-    private MonsterRunes createRunes() {
-        // TODO
-        MonsterRunes monsterRunes = new MonsterRunes();
-
-        Rune rune = new Rune();
-        rune.setMainBonusStat(new BonusStat(new Stat(EvolvingStatType.ATK, 50), false));
-        rune.setName("Durable");
-        rune.setPrefixBonusStat(new BonusStat(new Stat(EvolvingStatType.DEF, 5), true));
-        rune.getSubBonusStats().add(new BonusStat(new Stat(EvolvingStatType.HP, 5), true));
-        rune.getSubBonusStats().add(new BonusStat(new Stat(EvolvingStatType.HP, 360), false));
-
-        monsterRunes.getRunes().put(MonsterRuneSlot.FIRST_SLOT, rune);
-
-        rune = new Rune();
-        rune.setMainBonusStat(new BonusStat(new Stat(EvolvingStatType.ATK, 15), true));
-        rune.getSubBonusStats().add(new BonusStat(new Stat(StaticStatType.SPD, 5), false));
-        rune.getSubBonusStats().add(new BonusStat(new Stat(EvolvingStatType.HP, 360), false));
-
-        monsterRunes.getRunes().put(MonsterRuneSlot.FOURTH_SLOT, rune);
-
-        return monsterRunes;
     }
 
     private MonsterStaticStats createStaticStats(){
@@ -68,10 +42,6 @@ public class RaoqMocked extends Monster {
          * Awakened stats
          */
         stats.getStaticStats().put(Awaken.AWAKENED, StatUtils.generateEntryForStaticStat(StaticStatType.SPD, 108));
-//        stats.getStaticStats().get(Awaken.AWAKENED).put(StaticStatType.CR, 15);
-//        stats.getStaticStats().get(Awaken.AWAKENED).put(StaticStatType.CD, 50);
-//        stats.getStaticStats().get(Awaken.AWAKENED).put(StaticStatType.RES, 15);
-//        stats.getStaticStats().get(Awaken.AWAKENED).put(StaticStatType.ACC, 0);
 
         return stats;
     }

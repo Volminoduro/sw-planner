@@ -1,7 +1,7 @@
 package application.mapper;
 
-import application.view.MonsterView;
 import application.entity.Monster;
+import application.view.MonsterView;
 
 public abstract class MonsterToMonsterViewMapper {
 

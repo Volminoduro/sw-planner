@@ -1,6 +1,5 @@
 package application.controller;
 
-import application.entity.MongoSample;
 import application.service.MonsterWebService;
 import application.view.LeaderSkillView;
 import application.view.MonsterComboBoxView;
@@ -25,14 +24,14 @@ public class ApplicationController {
         return "Hello World !";
     }
 
-    @GetMapping(value = "/mongo")
-    public MongoSample essaiMongoDB() {
-        return monsterWebService.getMongoSample();
-    }
-
     @GetMapping(value = "/monster/get/{name}")
     public MonsterView getMonster(@PathVariable @NotNull String name) {
         return monsterWebService.getMonsterFromName(name);
+    }
+
+    @GetMapping(value = "/monster/create/mock")
+    public MonsterView createLastVersionOfMonsterMock() {
+        return monsterWebService.createRaoqMock();
     }
 
     @GetMapping(value = "/monster/getAllNames")

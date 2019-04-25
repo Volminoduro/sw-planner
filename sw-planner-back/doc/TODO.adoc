@@ -18,6 +18,10 @@
 
 * https://cloud.mongodb.com/v2/5cc05ef9ff7a25138c101cff#clusters/connect?clusterId=SMA
 
+* https://www.opencodez.com/java/use-mongodb-atlas-with-spring-boot.htm
+
 * Is it possible to have the database online ?
 
 * https://spring.io/guides/gs/accessing-data-mongodb/
+
+* Add IP from phone's 4G to mongoDBAtlas' clusters

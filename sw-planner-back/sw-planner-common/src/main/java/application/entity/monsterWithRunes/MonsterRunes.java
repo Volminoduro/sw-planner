@@ -1,6 +1,6 @@
 package application.entity.monsterWithRunes;
 
-import application.enums.rune.*;
+import application.enums.rune.MonsterRuneSlot;
 
 import java.util.SortedMap;
 import java.util.TreeMap;

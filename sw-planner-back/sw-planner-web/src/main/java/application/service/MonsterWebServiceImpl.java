@@ -1,15 +1,10 @@
 package application.service;
 
-import application.entity.MongoSample;
 import application.mapper.MonsterToMonsterViewMapper;
 import application.view.LeaderSkillView;
 import application.view.MonsterComboBoxView;
 import application.view.MonsterView;
-import application.entity.Monster;
-import application.enums.Attribute;
-import application.enums.Family;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 
 import java.util.Collections;
@@ -31,11 +26,6 @@ public class MonsterWebServiceImpl implements MonsterWebService {
     }
 
     @Override
-    public MongoSample getMongoSample() {
-        return null;
-    }
-
-    @Override
     @Cacheable
     public List<MonsterComboBoxView> getAllMonstersName(){
         // TODO
@@ -48,7 +38,8 @@ public class MonsterWebServiceImpl implements MonsterWebService {
     }
 
     @Override
-    public Monster getMonsterFromFamilyAndAttribute(Family family, Attribute attribute) {
+    public MonsterView createRaoqMock() {
         return null;
     }
+
 }

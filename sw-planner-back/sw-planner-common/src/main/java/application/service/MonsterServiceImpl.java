@@ -1,24 +1,28 @@
 package application.service;
 
-import application.dao.MonsterDAO;
+import application.dao.MonsterRepository;
 import application.entity.Monster;
-import application.enums.Attribute;
-import application.enums.Family;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class MonsterServiceImpl implements MonsterService {
 
     @Autowired
-    MonsterDAO monsterDAO;
+    MonsterRepository monsterRepository;
 
     public Monster getMonsterFromName(@NotNull String name){
-        return null;
+        Monster monster = monsterRepository.findByName(name);
+
+        // TODO : Implements skills logic (as sw-planner-common should be a library usable elsewhere)
+        return monster;
     }
 
     @Override
-    public Monster getMonsterFromFamilyAndAttribute(@NotNull Family family, @NotNull Attribute attribute) {
-        return null;
+    public void createMonsterMock(Monster monster){
+        monsterRepository.deleteAll();
+        monsterRepository.save(monster);
     }
+
 }
