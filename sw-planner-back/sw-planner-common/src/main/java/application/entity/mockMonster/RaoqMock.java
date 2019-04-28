@@ -1,4 +1,4 @@
-package application.entity.concreteMonster.inugami;
+package application.entity.mockMonster;
 
 import application.entity.*;
 import application.enums.*;
@@ -104,7 +104,77 @@ public class RaoqMock extends Monster {
     }
 
     private List<Skill> createSkills(){
-        return null;
+        List<Skill> skills = new ArrayList<>();
+
+        List<SkillLevel> skillLevels = new ArrayList<>();
+        ActiveSkill firstSkill = new ActiveSkill(){
+
+            @Override
+            public void execute(){
+                // What is supposed to do
+            }
+        };
+        firstSkill.setName("Scratch");
+        firstSkill.setAwakened(false);
+        firstSkill.setFormula("370% ATK");
+        firstSkill.setCooldown(1);
+        firstSkill.setDescription("Attacks the enemy with razor-sharp claws and decreases their Defense for 2 turns with a 50% chance.");
+        skillLevels.add(new SkillLevel(2, SkillLevelBonus.DAMAGE, 10));
+        skillLevels.add(new SkillLevel(3, SkillLevelBonus.DAMAGE, 10));
+        skillLevels.add(new SkillLevel(4, SkillLevelBonus.HARMFUL_EFFECT_RATE, 10));
+        firstSkill.setSkillLevelList(skillLevels);
+
+        skills.add(firstSkill);
+
+        skillLevels = new ArrayList<>();
+        ActiveSkill secondSkill = new ActiveSkill(){
+
+            @Override
+            public void execute(){
+                // What is supposed to do
+            }
+        };
+        secondSkill.setName("Scratch");
+        secondSkill.setAwakened(true);
+        secondSkill.setFormula("370% ATK xN");
+        secondSkill.setCooldown(1);
+        secondSkill.setDescription("Attacks the enemy with razor-sharp claws and decreases their Defense for 2 turns with a 50% chance and attacks consecutively with a 30% chance.");
+        skillLevels.add(new SkillLevel(2, SkillLevelBonus.DAMAGE, 10));
+        skillLevels.add(new SkillLevel(3, SkillLevelBonus.DAMAGE, 10));
+        skillLevels.add(new SkillLevel(4, SkillLevelBonus.DAMAGE, 10));
+        skillLevels.add(new SkillLevel(5, SkillLevelBonus.HARMFUL_EFFECT_RATE, 10));
+        skillLevels.add(new SkillLevel(6, SkillLevelBonus.HARMFUL_EFFECT_RATE, 10));
+        secondSkill.setSkillLevelList(skillLevels);
+
+        skills.add(secondSkill);
+
+        skillLevels = new ArrayList<>();
+        ActiveSkill thirdSkill = new ActiveSkill(){
+
+            @Override
+            public void execute(){
+                // What is supposed to do
+            }
+        };
+        thirdSkill.setName("Team up");
+        thirdSkill.setAwakened(false);
+        thirdSkill.setFormula("370% ATK +?");
+        thirdSkill.setCooldown(4);
+        thirdSkill.setDescription("Teams up with another ally to attack an enemy.");
+        skillLevels.add(new SkillLevel(2, SkillLevelBonus.COOLDOWN_REDUCTION, 1));
+        thirdSkill.setSkillLevelList(skillLevels);
+
+        skills.add(thirdSkill);
+
+        PassiveSkill fourthSkill = new PassiveSkill();
+        fourthSkill.setName("Annihilate");
+        fourthSkill.setAwakened(false);
+        fourthSkill.setFormula("");
+        fourthSkill.setDescription("Get an extra turn if you kill the enemy.");
+
+        skills.add(fourthSkill);
+
+        return skills;
     }
 
     @Override

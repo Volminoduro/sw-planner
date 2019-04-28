@@ -1,7 +1,5 @@
 package application.service;
 
-import application.entity.concreteMonster.inugami.RaoqMock;
-import application.mapper.MonsterToMonsterViewMapper;
 import application.view.LeaderSkillView;
 import application.view.MonsterSelectionBoxView;
 import application.view.MonsterView;
@@ -24,7 +22,7 @@ public class MonsterWebServiceImpl implements MonsterWebService {
         // TODO : If it's already loaded, we should check the id of modification of the monster on the database to check it's the same thing
         // TODO : If the id of modification is the same : we shouldn't even sent a monster back, just a OK message telling
         // TODO : https://medium.com/@igorkosandyak/spring-boot-caching-d74591abe117
-        return MonsterToMonsterViewMapper.map(monsterService.getMonsterFromName(name));
+        return new MonsterView(monsterService.getMonsterFromName(name));
     }
 
     @Override
@@ -42,9 +40,11 @@ public class MonsterWebServiceImpl implements MonsterWebService {
     }
 
     @Override
-    public MonsterView createMonsterMock(String name) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-        monsterService.createMonsterMock(name);
-        return this.getMonsterFromName(name);
+    public List<MonsterView> createAllMonstersMock() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        monsterService.createMonstersMock();
+        List<MonsterView> monstersView = new ArrayList<>();
+        monsterService.getAllMonsters().forEach(monster -> monstersView.add(new MonsterView(monster)));
+        return monstersView;
     }
 
 }

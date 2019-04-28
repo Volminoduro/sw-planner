@@ -11,7 +11,9 @@ public interface MonsterService {
     Monster getMonsterFromName(String name) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException;
 
     @Transactional
-    void createMonsterMock(String name);
+    void createMonstersMock();
+
+    List<Monster> getAllMonsters();
 
     List<Monster> getAllMonstersSelection();
 }

@@ -9,9 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.TreeSet;
 
 @Document(collection = "monster")
@@ -27,17 +25,28 @@ public class Monster implements Comparable<Monster> {
     private StarGrade starGrade;
     private Level level;
     private Boolean awakened;
-    @DBRef(lazy = true)
     private List<MonsterStaticStat> staticStats;
     private List<MonsterEvolvingStat> evolvingStats;
     // TODO : Everything, excepts skills' logic should be saved into database
-    @DBRef(lazy = true)
     private List<Skill> skills;
     // TODO
-    @DBRef(lazy = true)
     private LeaderSkill leaderSkill;
 
     public Monster() {
+    }
+
+    public Monster(String name, Family family, Attribute attribute, Role role, StarGrade starGrade, Level level, Boolean awakened, List<MonsterStaticStat> staticStats, List<MonsterEvolvingStat> evolvingStats, List<Skill> skills, LeaderSkill leaderSkill) {
+        this.name = name;
+        this.family = family;
+        this.attribute = attribute;
+        this.role = role;
+        this.starGrade = starGrade;
+        this.level = level;
+        this.awakened = awakened;
+        this.staticStats = staticStats;
+        this.evolvingStats = evolvingStats;
+        this.skills = skills;
+        this.leaderSkill = leaderSkill;
     }
 
     protected Monster(Monster monster) {

@@ -20,21 +20,6 @@ public class ApplicationController {
     @Autowired
     private MonsterWebService monsterWebService;
 
-    @RequestMapping(value = "/")
-    public String anyPoint() {
-        return "Hello World !";
-    }
-
-    @GetMapping(value = "/monster/get/{name}")
-    public MonsterView getMonster(@PathVariable @NotNull String name) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-        return monsterWebService.getMonsterFromName(name);
-    }
-
-    @GetMapping(value = "/monster/create/{name}")
-    public MonsterView createLastVersionOfMonsterMock(@PathVariable @NotNull String name) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        return monsterWebService.createMonsterMock(name);
-    }
-
     @GetMapping(value = "/monster/getAll")
     public List<MonsterSelectionBoxView> getAllMonstersName() {
         return monsterWebService.getAllMonstersSelection();
@@ -44,5 +29,23 @@ public class ApplicationController {
     public List<LeaderSkillView> getAllsLeadersSkill() {
         return monsterWebService.getAllLeadersSkill();
     }
+
+    @GetMapping(value = "/monster/get/{name}")
+    public MonsterView getMonster(@PathVariable @NotNull String name) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        return monsterWebService.getMonsterFromName(name);
+    }
+
+    @GetMapping(value = "/monster/createAll")
+    public List<MonsterView> createLastVersionOfMonsterMock() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        return monsterWebService.createAllMonstersMock();
+    }
+
+
+
+
+
+
+
+
 
 }

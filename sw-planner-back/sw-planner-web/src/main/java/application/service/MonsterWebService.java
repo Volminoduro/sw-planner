@@ -15,5 +15,5 @@ public interface MonsterWebService {
 
     List<LeaderSkillView> getAllLeadersSkill();
 
-    MonsterView createMonsterMock(String name) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
+    List<MonsterView> createAllMonstersMock() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
 }

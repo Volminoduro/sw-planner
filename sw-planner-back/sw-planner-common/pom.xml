@@ -10,6 +10,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <properties>
+        <reflections.version>0.9.11</reflections.version>
+    </properties>
+
     <groupId>in.nocte</groupId>
     <artifactId>sw-planner-common</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -37,6 +41,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>${reflections.version}</version>
         </dependency>
     </dependencies>
 

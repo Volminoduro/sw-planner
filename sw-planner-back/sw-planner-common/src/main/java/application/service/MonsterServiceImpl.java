@@ -2,14 +2,18 @@ package application.service;
 
 import application.dao.MonsterRepository;
 import application.entity.Monster;
-import application.entity.concreteMonster.inugami.RaoqMock;
+import application.utils.ClassesUtils;
+import ch.qos.logback.core.joran.action.Action;
 import org.jetbrains.annotations.NotNull;
+import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class MonsterServiceImpl implements MonsterService {
@@ -26,13 +30,37 @@ public class MonsterServiceImpl implements MonsterService {
 
     @Override
     @Transactional
-    public void createMonsterMock(String name){
-        // TODO : Use monster name to inspect classes in order to create it
-//        Monster monster = (Monster) Class.forName("application.entity.concreteMonster."+monster.getFamily()+"."+name).getConstructor().newInstance(monster);
+    public void createMonstersMock(){
+        // Scan all classes in mockMonster package and save it
+        Reflections reflections = new Reflections("application.entity.mockMonster");
+        Set<Class<? extends Monster>> allClasses =
+                reflections.getSubTypesOf(Monster.class);
+        List<Monster> monsters = new ArrayList<>();
+        allClasses.forEach(monster ->
+                {
+                    try {
+                        Monster monsterMock = monster.newInstance();
+                        monsters.add((Monster) Class.forName("application.entity.concreteMonster."+monsterMock.getFamily()+"."+monsterMock.getName()).getConstructor(Monster.class).newInstance(monsterMock));
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchMethodException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+        );
+        monsterRepository.deleteAll(monsters);
+        monsterRepository.saveAll(monsters);
+    }
 
-        Monster monster = new RaoqMock();
-        monsterRepository.delete(monster);
-        monsterRepository.save(monster);
+    @Override
+    public List<Monster> getAllMonsters(){
+        return monsterRepository.findAll();
     }
 
     @Override
