@@ -4,25 +4,37 @@ import application.enums.Attribute;
 import application.enums.Family;
 import application.enums.Role;
 import application.enums.StarGrade;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Document(collection = "monster")
-public abstract class Monster implements Comparable<Monster> {
+public class Monster implements Comparable<Monster> {
 
+    // TODO : lazy loading not working
+
+    @Id
     private String name;
     private Family family;
     private Attribute attribute;
     private Role role;
     private StarGrade starGrade;
     private Level level;
-    private boolean awakened;
-    private MonsterStaticStats staticStats;
-    private MonsterEvolvingStats evolvingStats;
+    private Boolean awakened;
+    @DBRef(lazy = true)
+    private List<MonsterStaticStat> staticStats;
+    private List<MonsterEvolvingStat> evolvingStats;
     // TODO : Everything, excepts skills' logic should be saved into database
+    @DBRef(lazy = true)
     private List<Skill> skills;
     // TODO
+    @DBRef(lazy = true)
     private LeaderSkill leaderSkill;
 
     public Monster() {
@@ -39,6 +51,13 @@ public abstract class Monster implements Comparable<Monster> {
         this.staticStats = monster.staticStats;
         this.evolvingStats = monster.evolvingStats;
         this.skills = monster.skills;
+    }
+
+    public int getFirstStarGrade(){
+        // TODO : Check its in boudaries, unless throw exception
+        TreeSet<Integer> allStarsGrade = new TreeSet<>();
+        this.evolvingStats.forEach(evolvingStat -> allStarsGrade.add(evolvingStat.getStarGrade()));
+        return allStarsGrade.first();
     }
 
     public String getName() {
@@ -89,27 +108,27 @@ public abstract class Monster implements Comparable<Monster> {
         this.level = level;
     }
 
-    public boolean isAwakened() {
+    public Boolean getAwakened() {
         return awakened;
     }
 
-    public void setAwakened(boolean awakened) {
+    public void setAwakened(Boolean awakened) {
         this.awakened = awakened;
     }
 
-    public MonsterStaticStats getStaticStats() {
+    public List<MonsterStaticStat> getStaticStats() {
         return staticStats;
     }
 
-    public void setStaticStats(MonsterStaticStats staticStats) {
+    public void setStaticStats(List<MonsterStaticStat> staticStats) {
         this.staticStats = staticStats;
     }
 
-    public MonsterEvolvingStats getEvolvingStats() {
+    public List<MonsterEvolvingStat> getEvolvingStats() {
         return evolvingStats;
     }
 
-    public void setEvolvingStats(MonsterEvolvingStats evolvingStats) {
+    public void setEvolvingStats(List<MonsterEvolvingStat> evolvingStats) {
         this.evolvingStats = evolvingStats;
     }
 
@@ -151,5 +170,10 @@ public abstract class Monster implements Comparable<Monster> {
                 ", skills=" + skills +
                 ", leaderSkill=" + leaderSkill +
                 '}';
+    }
+
+    @Override
+    public int compareTo(@NotNull Monster o) {
+        return 0;
     }
 }

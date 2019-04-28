@@ -1,23 +1,25 @@
 package application.service;
 
+import application.entity.concreteMonster.inugami.RaoqMock;
 import application.mapper.MonsterToMonsterViewMapper;
 import application.view.LeaderSkillView;
-import application.view.MonsterComboBoxView;
+import application.view.MonsterSelectionBoxView;
 import application.view.MonsterView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
-//@CacheConfig(cacheNames={"monster"})
+@Service
 public class MonsterWebServiceImpl implements MonsterWebService {
 
     @Autowired
     MonsterService monsterService;
 
     @Override
-    public MonsterView getMonsterFromName(String name) {
+    public MonsterView getMonsterFromName(String name) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         // TODO : First, check it's not already load (by name)
         // TODO : If it's already loaded, we should check the id of modification of the monster on the database to check it's the same thing
         // TODO : If the id of modification is the same : we shouldn't even sent a monster back, just a OK message telling
@@ -26,20 +28,23 @@ public class MonsterWebServiceImpl implements MonsterWebService {
     }
 
     @Override
-    @Cacheable
-    public List<MonsterComboBoxView> getAllMonstersName(){
-        // TODO
-        return Collections.EMPTY_LIST;
+    // TODO : Cacheable ?
+    public List<MonsterSelectionBoxView> getAllMonstersSelection() {
+        List<MonsterSelectionBoxView> monsterSelectionBoxViewList = new ArrayList<>();
+        // TODO : Optimization with stream ?
+        monsterService.getAllMonstersSelection().forEach(monster -> monsterSelectionBoxViewList.add(new MonsterSelectionBoxView(monster)));
+        return monsterSelectionBoxViewList;
     }
 
     @Override
-    public List<LeaderSkillView> getAllLeadersSkill() {
+    public List<LeaderSkillView> getAllLeadersSkill(){
         return null;
     }
 
     @Override
-    public MonsterView createRaoqMock() {
-        return null;
+    public MonsterView createMonsterMock(String name) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        monsterService.createMonsterMock(name);
+        return this.getMonsterFromName(name);
     }
 
 }

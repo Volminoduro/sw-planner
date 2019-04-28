@@ -14,14 +14,41 @@
 
 * https://www.mongodb.com/cloud/atlas/pricing
 
-* Whats is the main perks of MongoDB ?
-
 * https://cloud.mongodb.com/v2/5cc05ef9ff7a25138c101cff#clusters/connect?clusterId=SMA
 
-* https://www.opencodez.com/java/use-mongodb-atlas-with-spring-boot.htm
+== Controller
 
-* Is it possible to have the database online ?
+=== Get calls
 
-* https://spring.io/guides/gs/accessing-data-mongodb/
+==== Get all monsters reduced for monster selection combo box view
 
-* Add IP from phone's 4G to mongoDBAtlas' clusters
+* Combo box : monster selection (name, family, attribut, first star grade, image)
+
+==== Get all monsters reduced for monster selection combo box view
+
+* Combo box : leader skill selection (name, family, attribute, image, leaderskill (context, stat boosted, amount boost))
+
+==== Get one monster full
+
+* All needed informations :
+
+** Name
+** Attribute
+** Role
+** Family
+** Static stats
+** Evolving stats
+** Skills
+** Leader skill
+
+==== Get all runes configuration (todo)
+
+==== Get all buildings configuration (todo)
+
+=== Post calls
+
+==== Create a monster (todo)
+
+* JSON mapping (todo)
+
+==== Launch a simulation (todo)

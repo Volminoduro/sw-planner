@@ -10,11 +10,8 @@ public abstract class MonsterToMonsterViewMapper {
                 monster.getFamily().name(),
                 monster.getAttribute().name(),
                 monster.getRole().name(),
-                monster.getStarGrade().getValue(),
-                monster.getLevel().getLevel(),
-                monster.isAwakened(),
-                MonsterStatToMonsterStatViewMapper.map(monster.getStaticStats()),
-                MonsterStatToMonsterStatViewMapper.map(monster.getEvolvingStats()),
+                monster.getStaticStats(),
+                monster.getEvolvingStats(),
                 MonsterSkillToMonsterSkillViewMapper.map(monster.getSkills()),
                 monster.getLeaderSkill());
     }
