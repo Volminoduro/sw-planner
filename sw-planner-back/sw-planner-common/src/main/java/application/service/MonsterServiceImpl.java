@@ -40,7 +40,7 @@ public class MonsterServiceImpl implements MonsterService {
                 {
                     try {
                         Monster monsterMock = monster.newInstance();
-                        monsters.add((Monster) Class.forName("application.entity.concreteMonster."+monsterMock.getFamily()+"."+monsterMock.getName()).getConstructor(Monster.class).newInstance(monsterMock));
+                        monsters.add(new Monster((Monster) Class.forName("application.entity.concreteMonster."+monsterMock.getFamily()+"."+monsterMock.getName()).getConstructor(Monster.class).newInstance(monsterMock)));
                     } catch (InstantiationException e) {
                         e.printStackTrace();
                     } catch (IllegalAccessException e) {
