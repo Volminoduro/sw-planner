@@ -15,5 +15,4 @@ public interface MonsterService {
 
     List<Monster> getAllMonsters();
 
-    List<Monster> getAllMonstersSelection();
 }

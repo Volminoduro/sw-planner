@@ -61,9 +61,4 @@ public class MonsterServiceImpl implements MonsterService {
         return monsterRepository.findAll();
     }
 
-    @Override
-    public List<Monster> getAllMonstersSelection(){
-        return monsterRepository.findAll();
-    }
-
 }
