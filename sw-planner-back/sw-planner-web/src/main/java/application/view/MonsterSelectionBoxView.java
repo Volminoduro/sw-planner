@@ -1,15 +1,24 @@
 package application.view;
 
 import application.entity.Monster;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.FieldDefaults;
 
+@FieldDefaults(level= AccessLevel.PRIVATE)
+@Getter
+@Setter
+@ToString
 public class MonsterSelectionBoxView {
 
-    private String name;
-    private String family;
-    private String attribute;
-    private String role;
+    String name;
+    String family;
+    String attribute;
+    String role;
     // TODO image
-    private Integer startingStarGrade;
+    Integer startingStarGrade;
 
     public MonsterSelectionBoxView(Monster monster){
         this.name = monster.getName();
@@ -17,45 +26,5 @@ public class MonsterSelectionBoxView {
         this.attribute = monster.getAttribute().name();
         this.role = monster.getRole().name();
         this.startingStarGrade = monster.getFirstStarGrade();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getFamily() {
-        return family;
-    }
-
-    public void setFamily(String family) {
-        this.family = family;
-    }
-
-    public String getAttribute() {
-        return attribute;
-    }
-
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public Integer getStartingStarGrade() {
-        return startingStarGrade;
-    }
-
-    public void setStartingStarGrade(Integer startingStarGrade) {
-        this.startingStarGrade = startingStarGrade;
     }
 }

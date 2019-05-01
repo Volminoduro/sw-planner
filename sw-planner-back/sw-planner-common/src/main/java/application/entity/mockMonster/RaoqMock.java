@@ -3,12 +3,10 @@ package application.entity.mockMonster;
 import application.entity.*;
 import application.enums.*;
 import application.utils.LevelUtils;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Document(collection = "monster")
 public class RaoqMock extends Monster {
 
     public RaoqMock(){
