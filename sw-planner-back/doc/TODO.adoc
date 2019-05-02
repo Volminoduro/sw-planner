@@ -16,6 +16,8 @@
 
 * https://cloud.mongodb.com/v2/5cc05ef9ff7a25138c101cff#clusters/connect?clusterId=SMA
 
+* https://medium.com/@mladen.maravic/spring-data-mongodb-my-take-on-inheritance-support-102361c08e3d
+
 == Controller
 
 === Get calls

@@ -1,5 +1,6 @@
 package application.entity.mockMonster;
 
+import application.document.MonsterDocument;
 import application.entity.*;
 import application.enums.*;
 import application.utils.LevelUtils;
@@ -7,19 +8,15 @@ import application.utils.LevelUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RaoqMock extends Monster {
+public class RaoqMock extends MonsterDocument {
 
     public RaoqMock(){
         this.setName("Raoq");
         this.setRole(Role.ATTACK);
         this.setAttribute(Attribute.FIRE);
         this.setFamily(Family.inugami);
-        this.setStarGrade(StarGrade.THREE_STARS_GRADE);
-        this.setAwakened(false);
-        this.setLevel(new Level(CommonConstantes.MINIMAL_LEVEL_MONSTER));
         this.setStaticStats(this.createStaticStats());
         this.setEvolvingStats(this.createEvolvingStats());
-        // TODO
         this.setSkills(this.createSkills());
         this.setLeaderSkill(null);
     }
@@ -174,11 +171,5 @@ public class RaoqMock extends Monster {
 
         return skills;
     }
-
-    @Override
-    public int compareTo(Monster o) {
-        return 0;
-    }
-
 
 }

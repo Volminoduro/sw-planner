@@ -1,9 +1,8 @@
 package application.entity;
 
-import application.enums.Attribute;
-import application.enums.Family;
-import application.enums.Role;
-import application.enums.StarGrade;
+import application.document.MonsterDocument;
+import application.enums.*;
+import application.utils.StarGradeUtils;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.jetbrains.annotations.NotNull;
@@ -31,13 +30,27 @@ public class Monster implements Comparable<Monster> {
     Role role;
     StarGrade starGrade;
     Level level;
-    Boolean awakened;
+    Awaken awakened;
     List<MonsterStaticStat> staticStats;
     List<MonsterEvolvingStat> evolvingStats;
     // TODO : Everything, excepts skills' logic should be saved into database
     List<Skill> skills;
     // TODO
     LeaderSkill leaderSkill;
+
+    public Monster(MonsterDocument monsterDocument){
+        this.name = monsterDocument.getName();
+        this.family = monsterDocument.getFamily();
+        this.attribute = monsterDocument.getAttribute();
+        this.role = monsterDocument.getRole();
+        this.level = new Level(CommonConstantes.MINIMAL_LEVEL_MONSTER);
+        this.awakened = Awaken.UNAWAKENED;
+        this.staticStats = monsterDocument.getStaticStats();
+        this.evolvingStats = monsterDocument.getEvolvingStats();
+        this.skills = monsterDocument.getSkills();
+        this.leaderSkill = monsterDocument.getLeaderSkill();
+        this.starGrade = StarGradeUtils.getStarGrade(getFirstStarGrade());
+    }
 
     public Monster(Monster monster) {
         this.name = monster.name;
@@ -50,6 +63,7 @@ public class Monster implements Comparable<Monster> {
         this.staticStats = monster.staticStats;
         this.evolvingStats = monster.evolvingStats;
         this.skills = monster.skills;
+        this.leaderSkill = monster.leaderSkill;
     }
 
     public int getFirstStarGrade(){

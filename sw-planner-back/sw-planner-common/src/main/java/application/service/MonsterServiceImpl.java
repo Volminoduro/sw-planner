@@ -1,6 +1,7 @@
 package application.service;
 
-import application.dao.MonsterRepository;
+import application.dao.MonsterDocumentRepository;
+import application.document.MonsterDocument;
 import application.entity.Monster;
 import org.jetbrains.annotations.NotNull;
 import org.reflections.Reflections;
@@ -17,12 +18,12 @@ import java.util.Set;
 public class MonsterServiceImpl implements MonsterService {
 
     @Autowired
-    MonsterRepository monsterRepository;
+    MonsterDocumentRepository monsterDocumentRepository;
 
     public Monster getMonsterFromName(@NotNull String name) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Monster monster = monsterRepository.findByName(name);
-        monster = (Monster) Class.forName("application.entity.concreteMonster."+monster.getFamily()+"."+name).getConstructor(Monster.class).newInstance(monster);
-        // TODO : Implements skills logic (as sw-planner-common should be a library usable elsewhere)
+        MonsterDocument monsterDocument = monsterDocumentRepository.findByName(name);
+        Monster monster = (Monster) Class.forName("application.entity.concreteMonster."+monsterDocument.getFamily()+"."+name).getConstructor(Monster.class).newInstance(monsterDocument);
+        // TODO : Checks skills exists ?
         return monster;
     }
 
@@ -31,34 +32,44 @@ public class MonsterServiceImpl implements MonsterService {
     public void createMonstersMock(){
         // Scan all classes in mockMonster package and save it
         Reflections reflections = new Reflections("application.entity.mockMonster");
-        Set<Class<? extends Monster>> allClasses =
-                reflections.getSubTypesOf(Monster.class);
-        List<Monster> monsters = new ArrayList<>();
+        Set<Class<? extends MonsterDocument>> allClasses =
+                reflections.getSubTypesOf(MonsterDocument.class);
+        List<MonsterDocument> monsters = new ArrayList<>();
         allClasses.forEach(monster ->
                 {
                     try {
-                        Monster monsterMock = monster.newInstance();
-                        monsters.add(new Monster((Monster) Class.forName("application.entity.concreteMonster."+monsterMock.getFamily()+"."+monsterMock.getName()).getConstructor(Monster.class).newInstance(monsterMock)));
+                        monsters.add(new MonsterDocument(monster.newInstance()));
                     } catch (InstantiationException e) {
                         e.printStackTrace();
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
-                    } catch (NoSuchMethodException e) {
-                        e.printStackTrace();
-                    } catch (InvocationTargetException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
                     }
                 }
         );
-        monsterRepository.deleteAll(monsters);
-        monsterRepository.saveAll(monsters);
+        monsterDocumentRepository.deleteAll(monsters);
+        monsterDocumentRepository.saveAll(monsters);
     }
 
     @Override
     public List<Monster> getAllMonsters(){
-        return monsterRepository.findAll();
+        List<MonsterDocument> monstersDocument = monsterDocumentRepository.findAll();
+        List<Monster> monsters = new ArrayList<>();
+        monstersDocument.forEach(monsterDocument -> {
+            try {
+                monsters.add((Monster) Class.forName("application.entity.concreteMonster."+monsterDocument.getFamily()+"."+monsterDocument.getName()).getConstructor(Monster.class).newInstance(monsterDocument));
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+        return monsters;
     }
 
 }
