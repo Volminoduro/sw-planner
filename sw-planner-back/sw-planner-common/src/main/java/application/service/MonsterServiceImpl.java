@@ -30,6 +30,7 @@ public class MonsterServiceImpl implements MonsterService {
     @Override
     @Transactional
     public void createMonstersMock(){
+        // TODO : https://stackoverflow.com/questions/34088780/how-to-get-bean-using-application-context-in-spring-boot Get bean instead of refleciton
         // Scan all classes in mockMonster package and save it
         Reflections reflections = new Reflections("application.entity.mockMonster");
         Set<Class<? extends MonsterDocument>> allClasses =
