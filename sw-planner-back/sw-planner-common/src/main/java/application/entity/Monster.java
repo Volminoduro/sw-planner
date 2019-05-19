@@ -1,6 +1,7 @@
 package application.entity;
 
 import application.document.MonsterDocument;
+import application.document.RestrictedMonsterDocument;
 import application.enums.*;
 import application.utils.StarGradeUtils;
 import lombok.*;
@@ -28,6 +29,7 @@ public class Monster implements Comparable<Monster> {
     Family family;
     Attribute attribute;
     Role role;
+    String image;
     StarGrade starGrade;
     Level level;
     Awaken awakened;
@@ -38,11 +40,19 @@ public class Monster implements Comparable<Monster> {
     // TODO
     LeaderSkill leaderSkill;
 
+    public Monster(RestrictedMonsterDocument restrictedMonsterDocument){
+        this.name = restrictedMonsterDocument.getName();
+        this.family = restrictedMonsterDocument.getFamily();
+        this.attribute = restrictedMonsterDocument.getAttribute();
+        this.role = restrictedMonsterDocument.getRole();
+    }
+
     public Monster(MonsterDocument monsterDocument){
         this.name = monsterDocument.getName();
         this.family = monsterDocument.getFamily();
         this.attribute = monsterDocument.getAttribute();
         this.role = monsterDocument.getRole();
+        this.image = monsterDocument.getImage();
         this.level = new Level(CommonConstantes.MINIMAL_LEVEL_MONSTER);
         this.awakened = Awaken.UNAWAKENED;
         this.staticStats = monsterDocument.getStaticStats();
@@ -57,6 +67,7 @@ public class Monster implements Comparable<Monster> {
         this.family = monster.family;
         this.attribute = monster.attribute;
         this.role = monster.role;
+        this.image = monster.image;
         this.starGrade = monster.starGrade;
         this.level = monster.level;
         this.awakened = monster.awakened;

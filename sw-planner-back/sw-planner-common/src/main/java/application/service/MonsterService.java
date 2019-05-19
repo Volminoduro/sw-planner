@@ -1,5 +1,6 @@
 package application.service;
 
+import application.document.RestrictedMonsterDocument;
 import application.entity.Monster;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,8 @@ public interface MonsterService {
 
     @Transactional
     void createMonstersMock();
+
+    List<RestrictedMonsterDocument> getAllRestrictedMonsters();
 
     List<Monster> getAllMonsters();
 

@@ -30,7 +30,7 @@ public class MonsterWebServiceImpl implements MonsterWebService {
     public List<MonsterSelectionBoxView> getAllMonstersSelection() {
         List<MonsterSelectionBoxView> monsterSelectionBoxViewList = new ArrayList<>();
         // TODO : Optimization with stream ?
-        monsterService.getAllMonsters().forEach(monster -> monsterSelectionBoxViewList.add(new MonsterSelectionBoxView(monster)));
+        monsterService.getAllRestrictedMonsters().forEach(monster -> monsterSelectionBoxViewList.add(new MonsterSelectionBoxView(monster)));
         return monsterSelectionBoxViewList;
     }
 

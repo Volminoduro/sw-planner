@@ -10,6 +10,7 @@ import application.enums.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -21,17 +22,16 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class MonsterDocument {
+public class MonsterDocument extends RestrictedMonsterDocument {
 
-    @Id
-    String name;
-    Family family;
-    Attribute attribute;
-    Role role;
+    @DBRef(lazy = true)
     List<MonsterStaticStat> staticStats;
+    @DBRef(lazy = true)
     List<MonsterEvolvingStat> evolvingStats;
+    @DBRef(lazy = true)
     List<Skill> skills;
     // TODO
+    @DBRef(lazy = true)
     LeaderSkill leaderSkill;
 
     public MonsterDocument(MonsterDocument monsterDocument){

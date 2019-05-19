@@ -1,5 +1,6 @@
 package application.view;
 
+import application.document.RestrictedMonsterDocument;
 import application.entity.Monster;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,14 +18,15 @@ public class MonsterSelectionBoxView {
     String family;
     String attribute;
     String role;
-    // TODO image
+    String image;
     Integer startingStarGrade;
 
-    public MonsterSelectionBoxView(Monster monster){
-        this.name = monster.getName();
-        this.family = monster.getFamily().name();
-        this.attribute = monster.getAttribute().name();
-        this.role = monster.getRole().name();
-        this.startingStarGrade = monster.getFirstStarGrade();
+    public MonsterSelectionBoxView(RestrictedMonsterDocument restrictedMonsterDocument){
+        this.name = restrictedMonsterDocument.getName();
+        this.family = restrictedMonsterDocument.getFamily().name();
+        this.attribute = restrictedMonsterDocument.getAttribute().name();
+        this.role = restrictedMonsterDocument.getRole().name();
+        this.image = restrictedMonsterDocument.getImage();
+        this.startingStarGrade = restrictedMonsterDocument.getFirstStarGrade();
     }
 }

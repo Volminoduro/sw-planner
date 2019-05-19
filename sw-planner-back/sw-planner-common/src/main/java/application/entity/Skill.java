@@ -16,11 +16,11 @@ public class Skill {
     String name;
     String description;
     String formula;
+    String image;
     // TODO string for debuffs or buffs with the spells
     int slot;
     boolean awakened;
     int cooldown;
-    // TODO image
     List<SkillLevel> skillLevelList;
 
     public Skill() {
