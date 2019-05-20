@@ -1,7 +1,6 @@
 package application.view;
 
 import application.document.RestrictedMonsterDocument;
-import application.entity.Monster;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

@@ -26,9 +26,9 @@
 
 * Combo box : monster selection (name, family, attribut, first star grade, image)
 
-==== Get all monsters reduced for monster selection combo box view
+==== Get all monsters leader skill for monster selection combo box view
 
-* Combo box : leader skill selection (name, family, attribute, image, leaderskill (context, stat boosted, amount boost))
+* Combo box : leader skill selection (name, image, leaderskill (context, stat boosted, amount boost))
 
 ==== Get one monster full
 

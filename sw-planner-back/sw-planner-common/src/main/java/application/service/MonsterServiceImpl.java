@@ -1,15 +1,14 @@
 package application.service;
 
-import application.dao.CustomRepository;
 import application.dao.MonsterDocumentRepository;
 import application.dao.RestrictedMonsterDocumentRepository;
 import application.document.MonsterDocument;
+import application.document.MonsterMockDocument;
 import application.document.RestrictedMonsterDocument;
 import application.entity.Monster;
 import org.jetbrains.annotations.NotNull;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,8 +24,6 @@ public class MonsterServiceImpl implements MonsterService {
     MonsterDocumentRepository monsterDocumentRepository;
     @Autowired
     RestrictedMonsterDocumentRepository restrictedMonsterDocumentRepository;
-    @Autowired
-    CustomRepository customRepository;
 
     public Monster getMonsterFromName(@NotNull String name) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         MonsterDocument monsterDocument = monsterDocumentRepository.findByName(name);
@@ -42,8 +39,8 @@ public class MonsterServiceImpl implements MonsterService {
         // TODO : https://stackoverflow.com/questions/34088780/how-to-get-bean-using-application-context-in-spring-boot Get bean instead of reflection
         // Scan all classes in mockMonster package and save it
         Reflections reflections = new Reflections("application.entity.mockMonster");
-        Set<Class<? extends MonsterDocument>> allClasses =
-                reflections.getSubTypesOf(MonsterDocument.class);
+        Set<Class<? extends MonsterMockDocument>> allClasses =
+                reflections.getSubTypesOf(MonsterMockDocument.class);
         List<MonsterDocument> monsters = new ArrayList<>();
         allClasses.forEach(monster ->
                 {
@@ -62,10 +59,7 @@ public class MonsterServiceImpl implements MonsterService {
 
     @Override
     public List<RestrictedMonsterDocument> getAllRestrictedMonsters(){
-        List<RestrictedMonsterDocument> restrictedMonsterDocuments = restrictedMonsterDocumentRepository.findAll();
-        restrictedMonsterDocuments.forEach(restrictedMonsterDocument ->
-                restrictedMonsterDocument.setFirstStarGrade(customRepository.getFirstStarGradeAvailable(restrictedMonsterDocument.getName())));
-        return restrictedMonsterDocuments;
+        return restrictedMonsterDocumentRepository.findAll();
     }
 
     @Override

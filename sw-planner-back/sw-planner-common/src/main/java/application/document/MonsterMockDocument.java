@@ -1,6 +1,9 @@
 package application.document;
 
+import application.entity.LeaderSkill;
 import application.entity.MonsterEvolvingStat;
+import application.entity.MonsterStaticStat;
+import application.entity.Skill;
 import application.enums.Attribute;
 import application.enums.Family;
 import application.enums.Role;
@@ -15,16 +18,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-import java.util.TreeSet;
 
 @Document(collection = "monster")
-@FieldDefaults(level= AccessLevel.PROTECTED)
+@FieldDefaults(level= AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Getter
 @Setter
 @ToString
-public class RestrictedMonsterDocument {
+public class MonsterMockDocument {
 
     @Id
     String name;
@@ -32,13 +34,8 @@ public class RestrictedMonsterDocument {
     Attribute attribute;
     Role role;
     String image;
-    // TODO : Optimize to get only the firstStarGrade from evolvingStats
+    List<MonsterStaticStat> staticStats;
     List<MonsterEvolvingStat> evolvingStats;
-
-    public int getFirstStarGrade(){
-        // TODO : Check its in boudaries, unless throw exception
-        TreeSet<Integer> allStarsGrade = new TreeSet<>();
-        this.evolvingStats.forEach(evolvingStat -> allStarsGrade.add(evolvingStat.getStarGrade()));
-        return allStarsGrade.first();
-    }
+    List<Skill> skills;
+    LeaderSkill leaderSkill;
 }

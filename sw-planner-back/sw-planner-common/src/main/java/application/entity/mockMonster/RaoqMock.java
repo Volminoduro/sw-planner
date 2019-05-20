@@ -1,6 +1,7 @@
 package application.entity.mockMonster;
 
 import application.document.MonsterDocument;
+import application.document.MonsterMockDocument;
 import application.entity.*;
 import application.enums.*;
 import application.utils.LevelUtils;
@@ -8,7 +9,7 @@ import application.utils.LevelUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RaoqMock extends MonsterDocument {
+public class RaoqMock extends MonsterMockDocument {
 
     public RaoqMock(){
         this.setName("Raoq");

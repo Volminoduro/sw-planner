@@ -1,15 +1,15 @@
 package application.document;
 
 import application.entity.LeaderSkill;
-import application.entity.MonsterEvolvingStat;
 import application.entity.MonsterStaticStat;
 import application.entity.Skill;
-import application.enums.Attribute;
-import application.enums.Family;
-import application.enums.Role;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -27,8 +27,6 @@ public class MonsterDocument extends RestrictedMonsterDocument {
     @DBRef(lazy = true)
     List<MonsterStaticStat> staticStats;
     @DBRef(lazy = true)
-    List<MonsterEvolvingStat> evolvingStats;
-    @DBRef(lazy = true)
     List<Skill> skills;
     // TODO
     @DBRef(lazy = true)
@@ -43,5 +41,16 @@ public class MonsterDocument extends RestrictedMonsterDocument {
         this.evolvingStats = monsterDocument.getEvolvingStats();
         this.skills = monsterDocument.getSkills();
         this.leaderSkill = monsterDocument.getLeaderSkill();
+    }
+
+    public MonsterDocument(MonsterMockDocument monsterMockDocument){
+        this.name = monsterMockDocument.getName();
+        this.family = monsterMockDocument.getFamily();
+        this.attribute = monsterMockDocument.getAttribute();
+        this.role = monsterMockDocument.getRole();
+        this.staticStats = monsterMockDocument.getStaticStats();
+        this.evolvingStats = monsterMockDocument.getEvolvingStats();
+        this.skills = monsterMockDocument.getSkills();
+        this.leaderSkill = monsterMockDocument.getLeaderSkill();
     }
 }

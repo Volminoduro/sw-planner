@@ -4,7 +4,6 @@ import application.entity.Skill;
 import application.view.SkillView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class MonsterSkillToMonsterSkillViewMapper {
